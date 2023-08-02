@@ -17,6 +17,12 @@
             </a>
         </li>
         <li>
+            <a class="sidenav-item-link" href="{{ route('menus.index') }}">
+                <i class="mdi mdi-menu-open"></i>
+                <span class="nav-text">Menus</span>
+            </a>
+        </li>
+        <li>
             <a class="sidenav-item-link" href="#">
                 <i class="mdi mdi-wrench"></i>
                 <span class="nav-text">Utilites</span>

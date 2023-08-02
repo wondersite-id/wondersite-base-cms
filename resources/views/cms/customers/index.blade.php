@@ -87,6 +87,7 @@
         
         
         var table = $('.yajra-datatable').DataTable({
+            scrollX: true,
             processing: true,
             serverSide: true,
             bLengthChange: false,

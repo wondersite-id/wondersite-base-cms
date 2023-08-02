@@ -93,6 +93,7 @@
         
         
         var table = $('.yajra-datatable').DataTable({
+            scrollX: true,
             processing: true,
             serverSide: true,
             bLengthChange: false,
@@ -115,7 +116,7 @@
 
         $(document).on('click','body .delete-btns',function(){
             var id = $(this).attr('data-id')
-            $('#deleteForm').attr('action', "{{ url('users') }}"+ "/" + id)
+            $('#deleteForm').attr('action', "{{ url('features') }}"+ "/" + id)
         });
         
     });
