@@ -37,10 +37,13 @@
                             <ul class="list-group">
                                 @foreach ($activity->properties["old"] as $column => $value)
                                 <li class="list-group-item list-group-item-danger">
+                                    {{ ucwords(str_replace("_", " ", $column)) }} :
                                     @if ($column == "password")
-                                    {{ ucwords($column) }} : *********
+                                        *********
+                                    @elseif (is_bool($value))
+                                        {{ $value == true ? 'Yes' : 'No' }}
                                     @else
-                                    {{ ucwords($column) }} : {{ strip_tags($value) }}
+                                        {{ strip_tags($value) }}
                                     @endif
                                 </li>
                                 @endforeach
@@ -54,10 +57,13 @@
                             <ul class="list-group">
                                 @foreach ($activity->properties["attributes"] as $column => $value)
                                 <li class="list-group-item list-group-item-success">
+                                    {{ ucwords(str_replace("_", " ", $column)) }} :
                                     @if ($column == "password")
-                                    {{ ucwords($column) }} : *********
+                                        *********
+                                    @elseif (is_bool($value))
+                                        {{ $value == true ? 'Yes' : 'No' }}
                                     @else
-                                    {{ ucwords($column) }} : {{ strip_tags($value) }}
+                                        {{ strip_tags($value) }}
                                     @endif
                                 </li>
                                 @endforeach

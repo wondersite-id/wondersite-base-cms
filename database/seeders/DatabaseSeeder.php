@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\EmployeeSeeder;
-use Database\Seeders\SupervisorSeeder;
-use Database\Seeders\TeamSeeder;
-use Database\Seeders\EmployeeActivitySeeder;
+use Database\Seeders\MenuSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            SupervisorSeeder::class,
-            EmployeeSeeder::class,
-            TeamSeeder::class,
-            EmployeeActivitySeeder::class,
+            MenuSeeder::class,
         ]);
     }
 }

@@ -66,7 +66,7 @@
                 <img id="image-preview" height="150px" src="#" alt="Uploaded image" class="mt-3" style="display:none;"/>
             </div>
             <div class="form-group">
-                <label for="published_at">Published</label><br>
+                <label for="published_at">Published @include('cms._include.required')</label><br>
                 <label class="switch switch-text switch-primary switch-pill form-control-label mr-2">
                     <input id="published_at" name="published_at" type="checkbox" class="switch-input form-check-input" value="on" {{ old('published_at') == "on" ? 'checked' : ''}}>
                     <span class="switch-label" data-on="Yes" data-off="No"></span>

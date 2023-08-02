@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeatureController;
-use App\Http\Controllers\MediaController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,5 +43,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('features/historical-changes/{feature}', [FeatureController::class, 'historicalChanges'])->name('features.historical-changes');
     Route::resource('features', FeatureController::class);
 
-    Route::post('media/uploads', [MediaController::class, 'storeMedia'])->name('media.uploads');
+    // Menu Routes
+    Route::get('menus/historical-changes/{menu}', [MenuController::class, 'historicalChanges'])->name('menus.historical-changes');
+    Route::resource('menus', MenuController::class);
 });
