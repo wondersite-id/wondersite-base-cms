@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateSettingRequest;
 use App\Interfaces\SettingRepositoryInterface;
 use App\Models\Setting;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Spatie\Activitylog\Models\Activity;
@@ -47,6 +46,11 @@ class SettingController extends ResourceController
                 })
                 ->rawColumns(['description', 'published', 'sequence_number', 'image', 'action'])
                 ->make(true);
+        }
+
+        $type = $request->get('type');
+        if ($type == null || !in_array($type, Setting::SETTING_TYPE)) {
+            return redirect()->route($this->routePath . '.index', ['type' => 'home']);
         }
 
         return view('cms.' . $this->viewPath . '.index');
@@ -92,5 +96,17 @@ class SettingController extends ResourceController
 
         session()->flash('message', 'Successfully updated feature data');
         return redirect()->route($this->routePath . '.show', $utility);
+    }
+
+    /**
+     * Show the form for showing historical changes the specified resource.
+     */
+    public function historicalChanges(Setting $utility)
+    {
+        $activities = Activity::whereSubjectType(get_class($utility))
+            ->whereSubjectId($utility->id)
+            ->orderBy("created_at", "desc")
+            ->paginate(10);
+        return view('cms.' . $this->viewPath . '.historical-changes', ['model' => $utility, 'activities' => $activities]);
     }
 }

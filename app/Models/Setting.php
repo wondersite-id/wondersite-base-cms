@@ -19,6 +19,12 @@ class Setting extends Model implements HasMedia
     use HasUuid, HasFactory, HasSpatieMedia;
     use LogsActivity, InteractsWithMedia;
 
+    const SETTING_TYPE = [
+        'home',
+        'footer',
+        'other',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
