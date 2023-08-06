@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Admin')
+@section('title', $title)
 
-@section('description', 'Administrators have super-admin role. They can access all of CMS module, manage order & customer data and can manage website content.')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -13,7 +13,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('administrators.index') }}">List of Administrators</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route($routePrefix . '.index') }}">List of Administrators</a></li>
     </ol>
 </nav>
 <div class="card card-default">
@@ -22,7 +22,7 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route('administrators.create') }}" class="btn btn-primary btn-sm btn-pill">
+        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
@@ -39,14 +39,6 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
             <tbody>
             </tbody>
         </table>
@@ -87,11 +79,12 @@
         
         
         var table = $('.yajra-datatable').DataTable({
+            dom: '<lf><t><"d-flex justify-items-center justify-content-between py-5" <"small text-muted" i>p>',
             scrollX: true,
             processing: true,
             serverSide: true,
             bLengthChange: false,
-            ajax: "{{ route('administrators.index') }}",
+            ajax: "{{ route($routePrefix . '.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},

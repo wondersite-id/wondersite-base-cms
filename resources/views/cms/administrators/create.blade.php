@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Admin')
+@section('title', $title)
 
-@section('description', 'Administrators have super-admin role. They can access all of CMS module, manage order & customer data and can manage website content.')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -13,7 +13,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('administrators.index') }}">List of Administrators</a></li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Administrators</a></li>
         <li class="breadcrumb-item active" aria-current="page">Create Administrator</li>
     </ol>
 </nav>
@@ -27,7 +27,7 @@
 </div>
 <div class="card card-default">
     <div class="card-body">
-        <form method="POST" action="{{ route('administrators.store') }}">
+        <form method="POST" action="{{ route($routePrefix . '.store') }}">
             @csrf
             <div class="form-group">
                 <label for="name">Name <small class="text-danger">*</small></label>
@@ -51,7 +51,7 @@
                 @enderror
             </div>
             <hr />
-            @include('cms._include.buttons.back', ['backUrl' => route('administrators.index')])
+            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
             @include('cms._include.buttons.save')
         </form>
     </div>

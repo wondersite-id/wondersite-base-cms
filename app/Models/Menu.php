@@ -75,9 +75,17 @@ class Menu extends Model
     }
 
     /**
+     * Function to check whether the menu can be open in new tab or not
+     */
+    public function isNewTab()
+    {
+        return $this->is_open_in_new_tab;
+    }
+
+    /**
      * Scope a query to only include root menus.
      */
-    public function scopeIsRoot(Builder $query): void
+    public function scopeRoot(Builder $query): void
     {
         $query->whereNull('parent_id');
     }
@@ -85,7 +93,7 @@ class Menu extends Model
     /**
      * Scope a query to only include children menus.
      */
-    public function scopeIsChild(Builder $query): void
+    public function scopeChild(Builder $query): void
     {
         $query->whereNotNull('parent_id');
     }

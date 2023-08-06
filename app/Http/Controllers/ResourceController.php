@@ -37,6 +37,7 @@ class ResourceController extends Controller
             $model->saveImage($field, $value, 'request');
         } else {
             $model->clearMediaCollection(Str::plural($field));
+            // TO-DO check for empty request in edit form
         }
     }
 }

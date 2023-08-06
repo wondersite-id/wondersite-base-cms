@@ -1,6 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Admin')
+@section('title', $title)
+
+@section('description', $description)
 
 @section('css')
     @parent
@@ -11,7 +13,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('administrators.index') }}">List of Administrators</a></li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Administrators</a></li>
         <li class="breadcrumb-item active" aria-current="page">Change Password</li>
     </ol>
 </nav>
@@ -29,22 +31,22 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('administrators.show', $model) }}">Data</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('administrators.edit', $model) }}">Form</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.edit', $model) }}">Form</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('administrators.change-password', $model) }}">Change Password</a>
+                <a class="nav-link active" href="{{ route($routePrefix . '.change-password', $model) }}">Change Password</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('administrators.historical-changes', $model) }}">Historical Changes</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
 
         </ul>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('administrators.do-change-password', $model->id) }}">
+        <form method="POST" action="{{ route($routePrefix . '.do-change-password', $model->id) }}">
             @csrf
             <div class="form-group">
                 <label for="current_password">Current Password @include('cms._include.required')</label>
@@ -68,7 +70,7 @@
                 @enderror
             </div>
             <hr />
-            @include('cms._include.buttons.back', ['backUrl' => route('administrators.index')])
+            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
             @include('cms._include.buttons.save')
         </form>
     </div>

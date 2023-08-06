@@ -8,7 +8,6 @@ use App\Interfaces\MenuRepositoryInterface;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 
@@ -24,6 +23,11 @@ class MenuController extends ResourceController
         $this->repository = $repo;
         $this->viewPath = "menus";
         $this->routePath = "menus";
+        view()->share([
+            'title' => ucfirst($this->routePath),
+            'description' => 'Menu will be shown on every page. It will be located at the header & footer section.',
+            'routePrefix' => $this->routePath,
+        ]);
     }
 
     /**
@@ -39,7 +43,7 @@ class MenuController extends ResourceController
                 ->editColumn('url', '{{ (($model->url == "#" || $model->url == "javascript:void(0)")) ? "No URL Provided" : $url }}')
                 ->editColumn('type', '{{ Str::ucfirst($type) }}')
                 ->addColumn('new_tab', function ($row) {
-                    if ($row->is_open_in_new_tab) {
+                    if ($row->isNewTab()) {
                         $html = '<span class="badge badge-success">Yes</span>';
                     } else {
                         $html = '<span class="badge badge-secondary">No</span>';

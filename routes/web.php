@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,4 +47,8 @@ Route::middleware(['web', 'auth'])->group(function () {
     // Menu Routes
     Route::get('menus/historical-changes/{menu}', [MenuController::class, 'historicalChanges'])->name('menus.historical-changes');
     Route::resource('menus', MenuController::class);
+
+    // Setting or Utilites Routes
+    Route::get('utilities/historical-changes/{utility}', [SettingController::class, 'historicalChanges'])->name('utilities.historical-changes');
+    Route::resource('utilities', SettingController::class)->except(['create', 'store', 'destroy']);
 });

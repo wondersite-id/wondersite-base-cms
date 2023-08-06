@@ -24,6 +24,11 @@ class FeatureController extends ResourceController
         $this->repository = $repo;
         $this->viewPath = "features";
         $this->routePath = "features";
+        view()->share([
+            'title' => ucfirst($this->routePath),
+            'description' => 'Features will be shown on homepage and feature page. It contains name, description, sequence number and image.',
+            'routePrefix' => $this->routePath,
+        ]);
     }
 
     /**

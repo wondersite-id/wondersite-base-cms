@@ -43,7 +43,7 @@ class MenuRepository implements MenuRepositoryInterface
 
     public function getAllParents()
     {
-        return Menu::isRoot()->orderBy('sequence_number', 'asc')->get()->sortByDesc('type');
+        return Menu::root()->orderBy('sequence_number', 'asc')->get()->sortByDesc('type');
     }
 
     public function getAllChildsByParentId($parentId)
