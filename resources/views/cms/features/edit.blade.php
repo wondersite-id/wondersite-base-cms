@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Features')
+@section('title', $title)
 
-@section('description', 'Features will be shown on homepage and feature page. It contains name, description, sequence number and image.')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -13,7 +13,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('features.index') }}">List of Features</a></li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Features</a></li>
         <li class="breadcrumb-item active" aria-current="page">Update Feature</li>
     </ol>
 </nav>
@@ -23,7 +23,7 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route('features.create') }}" class="btn btn-primary btn-sm btn-pill">
+        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
@@ -33,18 +33,18 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('features.show', $model) }}">Data</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('features.edit', $model) }}">Form</a>
+                <a class="nav-link active" href="{{ route($routePrefix . '.edit', $model) }}">Form</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('features.historical-changes', $model) }}">Historical Changes</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
         </ul>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('features.update', $model->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route($routePrefix . '.update', $model->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -75,17 +75,17 @@
                     Image
                     <i class="mdi mdi-tooltip-image-outline"  data-toggle="tooltip" data-placement="right" data-original-title="Best image size with landscape image with size 1394x974. Accept all image file types with max size 2MB."></i>
                 </label>
-                <div class="accordion" id="accordionOne">
+                <div class="accordion" id="accordionImage">
                     <div class="card border-0">
-                        <div class="card-header" id="headingThree">
+                        <div class="card-header" id="headingImage">
                             <h2 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false" aria-controls="collapseImage">
                                     <i class="mdi mdi-cursor-default-click"></i>
                                     Click Here to Change The Image
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseThree" class="collapse {{ old('image') === null ? '' : 'show' }}" aria-labelledby="headingThree" data-parent="#accordionOne">
+                        <div id="collapseImage" class="collapse {{ old('image') === null ? '' : 'show' }}" aria-labelledby="headingImage" data-parent="#accordionImage">
                             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" placeholder="Image" value="{{ old('image') }}" accept="image/*">
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                 </label>
             </div>
             <hr />
-            @include('cms._include.buttons.back', ['backUrl' => route('features.index')])
+            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
             @include('cms._include.buttons.save')
         </form>
     </div>

@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Menus')
+@section('title', $title)
 
-@section('description', 'Menu will be shown on every page. It will be located at the header & footer section.')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -13,7 +13,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('menus.index') }}">List of Menus</a></li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Menus</a></li>
         <li class="breadcrumb-item active" aria-current="page">Add Menu</li>
     </ol>
 </nav>
@@ -27,7 +27,7 @@
 </div>
 <div class="card card-default">
     <div class="card-body">
-        <form method="POST" action="{{ route('menus.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route($routePrefix . '.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Name @include('cms._include.required')</label>
@@ -75,7 +75,7 @@
                 </label>
             </div>
             <hr />
-            @include('cms._include.buttons.back', ['backUrl' => route('menus.index')])
+            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
             @include('cms._include.buttons.save')
         </form>
     </div>

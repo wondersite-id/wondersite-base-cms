@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Features')
+@section('title', $title)
 
-@section('description', 'Features will be shown on homepage and feature page. It contains name, description, sequence number and image.')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -13,7 +13,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('features.index') }}">List of Features</a></li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Features</a></li>
         <li class="breadcrumb-item active" aria-current="page">Add Feature</li>
     </ol>
 </nav>
@@ -27,7 +27,7 @@
 </div>
 <div class="card card-default">
     <div class="card-body">
-        <form method="POST" action="{{ route('features.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route($routePrefix . '.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Name @include('cms._include.required')</label>
@@ -74,7 +74,7 @@
                 </label>
             </div>
             <hr />
-            @include('cms._include.buttons.back', ['backUrl' => route('features.index')])
+            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
             @include('cms._include.buttons.save')
         </form>
     </div>

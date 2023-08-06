@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\MenuSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             MenuSeeder::class,
+            SettingVersion1Seeder::class,
         ]);
     }
 }

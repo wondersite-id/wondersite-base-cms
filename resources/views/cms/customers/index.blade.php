@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Customers')
+@section('title', $title)
 
-@section('description', 'Customers can login to the CMS as a customer. They can manage their own orders and their website content if subscribed to the CMS add-ons')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -22,7 +22,7 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route('customers.create') }}" class="btn btn-primary btn-sm btn-pill">
+        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
@@ -39,14 +39,6 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
             <tbody>
             </tbody>
         </table>
@@ -87,11 +79,12 @@
         
         
         var table = $('.yajra-datatable').DataTable({
+            dom: '<lf><t><"d-flex justify-items-center justify-content-between py-5" <"small text-muted" i>p>',
             scrollX: true,
             processing: true,
             serverSide: true,
             bLengthChange: false,
-            ajax: "{{ route('customers.index') }}",
+            ajax: "{{ route($routePrefix . '.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},

@@ -26,6 +26,11 @@ class AdminController extends ResourceController
         $this->repository = $administratorRepository;
         $this->viewPath = "administrators";
         $this->routePath = "administrators";
+        view()->share([
+            'title' => ucfirst($this->routePath),
+            'description' => 'Administrators have super-admin role. They can access all of CMS module, manage order & customer data and can manage website content.',
+            'routePrefix' => $this->routePath,
+        ]);
     }
 
     /**

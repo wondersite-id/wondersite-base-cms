@@ -32,6 +32,30 @@ trait HasSpatieMedia
     }
 
     /**
+     * Saving image.
+     *
+     * @param string $field
+     * @param string $value
+     *
+     * @return void
+     */
+    public function saveImageUrl(string $field, $value, $type = null)
+    {
+        $collectionName = Str::plural($field);
+        $data = $this->getFirstMedia($collectionName);
+        if ($value !== null) {
+            if ($data !== null) {
+                if ($data->file_name != $value) {
+                    $data->delete();
+                    $this->addImageByType($field, $value, $collectionName, $type);
+                }
+            } else {
+                $this->addImageByType($field, $value, $collectionName, $type);
+            }
+        }
+    }
+
+    /**
      * Adding image by type.
      *
      * @param string $field

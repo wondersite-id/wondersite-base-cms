@@ -23,9 +23,9 @@
             </a>
         </li>
         <li>
-            <a class="sidenav-item-link" href="#">
+            <a class="sidenav-item-link" href="{{ route('utilities.index', ['type' => 'home']) }}">
                 <i class="mdi mdi-wrench"></i>
-                <span class="nav-text">Utilites</span>
+                <span class="nav-text">Utilities</span>
             </a>
         </li>
         <li class="section-title">

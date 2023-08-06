@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Menus')
+@section('title', $title)
 
-@section('description', 'Menu will be shown on every page. It will be located at the header & footer section.')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -22,7 +22,7 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route('menus.create') }}" class="btn btn-primary btn-sm btn-pill">
+        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
@@ -107,17 +107,6 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Seq. Number</th>
-                    <th>Type</th>
-                    <th>URL</th>
-                    <th>New Tab</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
             <tbody>
             </tbody>
         </table>
@@ -157,11 +146,12 @@
         @endif
         
         var table = $('.yajra-datatable').DataTable({
+            dom: '<lf><t><"d-flex justify-items-center justify-content-between py-5" <"small text-muted" i>p>',
             scrollX: true,
             processing: true,
             serverSide: true,
             bLengthChange: false,
-            ajax: "{{ route('menus.index') }}",
+            ajax: "{{ route($routePrefix . '.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},
@@ -174,7 +164,7 @@
                     name: 'action', 
                     orderable: false, 
                     searchable: false
-                },
+                } 
             ]
         });
 

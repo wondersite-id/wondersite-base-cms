@@ -8,7 +8,7 @@
                 <div class="card-header" id="heading-activity-{{ $index }}">
                     <h2 class="mb-0">
                         <button class="btn btn-link {{ $index > 0 ? 'collapsed': '' }}" type="button" data-toggle="collapse" data-target="#collapse-part-{{ $index }}" aria-expanded="false" aria-controls="collapse-part-{{ $index }}">
-                        <b>{{ ($activity->causer ? $activity->causer->name : "System" . " ") . " " . $activity->description . " this data" }}</b> ({{ $model->created_at->diffForHumans() }})
+                        <b>{{ ($activity->causer ? $activity->causer->name : "System" . " ") . " " . $activity->description . " this data" }}</b> ({{ $activity->created_at->diffForHumans() }})
                         </button>
                     </h2>
                 </div>

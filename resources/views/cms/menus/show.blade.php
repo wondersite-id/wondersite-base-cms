@@ -1,8 +1,8 @@
 @extends('layouts.cms')
  
-@section('title', 'Menus')
+@section('title', $title)
 
-@section('description', 'Menu will be shown on every page. It will be located at the header & footer section.')
+@section('description', $description)
 
 @section('css')
     @parent
@@ -13,7 +13,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('menus.index') }}">List of Menus</a></li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Menus</a></li>
         <li class="breadcrumb-item active" aria-current="page">Detail Menu</li>
     </ol>
 </nav>
@@ -23,7 +23,7 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route('menus.create') }}" class="btn btn-primary btn-sm btn-pill">
+        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
@@ -33,13 +33,13 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('menus.show', $model) }}">Data</a>
+                <a class="nav-link active" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('menus.edit', $model) }}">Form</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.edit', $model) }}">Form</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('menus.historical-changes', $model) }}">Historical Changes</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
         </ul>
     </div>
@@ -84,15 +84,15 @@
         <div class="form-group">
             <label for="image">Open In New Tab</label>
             <br>
-            @if ($model->is_open_in_new_tab)
+            @if ($model->isNewTab())
                 <span class="badge badge-success">Yes</span>
             @else
                 <span class="badge badge-secondary">No</span>
             @endif
         </div>
         <hr />
-        @include('cms._include.buttons.back', ['backUrl' => route('menus.index')])
-        @include('cms._include.buttons.edit', ['editUrl' => route('menus.edit', $model)])
+        @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
+        @include('cms._include.buttons.edit', ['editUrl' => route($routePrefix . '.edit', $model)])
     </div>
 </div>
 @endsection

@@ -13,8 +13,8 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Features</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Detail Feature</li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index', ['type' => $model->type]) }}">List of Utilities</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detail Utility</li>
     </ol>
 </nav>
 <div class="card card-default">
@@ -23,10 +23,6 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
-            <i class="mdi mdi-plus"></i>
-            &nbsp;Create New @yield('title')
-        </a>
     </div>
 </div>
 <div class="card card-default ">
@@ -50,9 +46,19 @@
             {{ $model->name }}
         </div>
         <div class="form-group">
-            <label for="name">Slug</label>
+            <label for="type">Type</label>
             <br>
-            {{ $model->slug }}
+            {{ ucfirst($model->type) }}
+        </div>
+        <div class="form-group">
+            <label for="form_type">Form Type</label>
+            <br>
+            {{ ucfirst($model->form_type) }}
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <br>
+            {!! $model->title !!}
         </div>
         <div class="form-group">
             <label for="description">Description</label>
@@ -60,28 +66,27 @@
             {!! $model->description !!}
         </div>
         <div class="form-group">
-            <label for="sequence_number">Sequence Number</label>
+            {{--  wysiwyg, text, textarea, image, switch --}}
+            <label for="value">Value</label>
             <br>
-            {{ $model->sequence_number }}
-        </div>
-        <div class="form-group">
-            <label for="image">Image</label>
-            <br>
-            @if ($image = $model->getFirstMedia("images"))
-            <img id="image-preview" height="150px" src="{{ $image->getUrl() }}" alt="Uploaded image" class="mt-3"/>
-            @endif
-        </div>
-        <div class="form-group">
-            <label for="image">Published</label>
-            <br>
-            @if ($model->isPublished())
-                <span class="badge badge-success">Published at {{ $model->published_at }}</span>
-            @else
-                <span class="badge badge-secondary">Unpublished</span>
+            @if ($model->form_type == "image")
+                @if ($image = $model->getFirstMedia(Str::plural('value')))
+                    <img id="image-preview" height="150px" src="{{ $image->getUrl() }}" alt="Uploaded image" class="mt-3"/>
+                @else
+                    No Image Attached
+                @endif
+            @elseif ($model->form_type == "text" || $model->form_type == "textarea" || $model->form_type == "wysiwyg")
+                {!! $model->value !!}
+            @elseif ($model->form_type == "switch")
+                @if ($model->value == "on")
+                    <span class="badge badge-success">Yes</span>
+                @else
+                    <span class="badge badge-secondary">No</span>
+                @endif
             @endif
         </div>
         <hr />
-        @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
+        @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index', ['type' => $model->type])])
         @include('cms._include.buttons.edit', ['editUrl' => route($routePrefix . '.edit', $model)])
     </div>
 </div>

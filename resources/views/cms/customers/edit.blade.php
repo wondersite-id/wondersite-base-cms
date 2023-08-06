@@ -2,16 +2,15 @@
  
 @section('title', 'Customers')
 
-@section('css')
-    @parent
-    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-@endsection
+@section('title', $title)
+
+@section('description', $description)
 
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">List of Customers</a></li>
+        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Customers</a></li>
         <li class="breadcrumb-item active" aria-current="page">Update Customer</li>
     </ol>
 </nav>
@@ -29,21 +28,21 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('customers.show', $model) }}">Data</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('customers.edit', $model) }}">Form</a>
+                <a class="nav-link active" href="{{ route($routePrefix . '.edit', $model) }}">Form</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('customers.change-password', $model) }}">Change Password</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.change-password', $model) }}">Change Password</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('customers.historical-changes', $model) }}">Historical Changes</a>
+                <a class="nav-link" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
         </ul>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('customers.update', $model->id) }}">
+        <form method="POST" action="{{ route($routePrefix . '.update', $model->id) }}">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -62,13 +61,13 @@
             </div>
             <div class="form-group">
                 <label for>Password</label><br>
-                    <a href="{{ route('customers.change-password', $model) }}" class="mb-1 btn btn-sm btn-outline-primary">
+                    <a href="{{ route($routePrefix . '.change-password', $model) }}" class="mb-1 btn btn-sm btn-outline-primary">
                         <i class=" mdi mdi-key mr-1"></i>
                         Change Password
                     </a>
             </div>
             <hr />
-            @include('cms._include.buttons.back', ['backUrl' => route('customers.index')])
+            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
             @include('cms._include.buttons.save')
         </form>
     </div>

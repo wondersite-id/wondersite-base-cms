@@ -13269,6 +13269,14 @@ label {
   border-bottom-right-radius: 30px;
   margin-left: -1px;
 }
+.nav-custom-pills .nav-item:last-child .active {
+  background-color: #9e6de0;
+  border-color: #9e6de0 !important;
+  color: #ffffff;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  margin-left: -1px;
+}
 .nav-custom-pills .nav-item.dropdown.show .nav-link {
   background-color: #9e6de0;
   color: #ffffff;
@@ -14512,16 +14520,11 @@ table.dataTable thead .sorting {
 }
 .dataTables_paginate.paging_simple_numbers .paginate_button {
   border: 1px solid #e5e9f2 !important;
-  padding: 10px;
+  padding: 8px 12px;
+  line-height: 1.25;
+  font-size: 0.75rem;
   background: none !important;
   background-color: #ffffff;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-@media (min-width: 768px) {
-  .dataTables_paginate.paging_simple_numbers .paginate_button {
-    padding: 10px 20px;
-  }
 }
 .dataTables_paginate.paging_simple_numbers .paginate_button:hover {
   color: #31343d !important;
@@ -15653,12 +15656,6 @@ table.dataTable thead .sorting {
   color: #8a909d;
   font-size: 0.75rem;
   padding: 8px 12px;
-}
-@media (min-width: 992px) {
-  .pagination .page-link {
-    padding: 1rem 1.3125rem;
-    font-size: 0.94rem;
-  }
 }
 .pagination .page-link .mdi::before {
   line-height: 1;

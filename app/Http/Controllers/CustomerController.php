@@ -26,6 +26,11 @@ class CustomerController extends ResourceController
         $this->repository = $customerRepository;
         $this->viewPath = "customers";
         $this->routePath = "customers";
+        view()->share([
+            'title' => ucfirst($this->routePath),
+            'description' => 'Customers can login to the CMS as a customer. They can manage their own orders and their website content if subscribed to the CMS add-ons',
+            'routePrefix' => $this->routePath,
+        ]);
     }
 
     /**
