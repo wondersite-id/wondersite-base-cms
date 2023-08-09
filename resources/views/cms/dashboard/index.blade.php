@@ -60,7 +60,7 @@
                 <div class="col-lg-6 col-xl-3">
                     <div class="card card-default bg-info">
                         <div class="card-header">
-                            <h2 class="text-white">Rp. </h2>
+                            <h2 class="text-white">Rp 1.000.000</h2>
                             <p class="flex-basis-100 text-white">Monthly Revenue</p>
                         </div>
                         <div class="card-body">
@@ -68,7 +68,7 @@
                                 <div class="progress-bar bg-white" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <span class="text-white text-capitalize">Reveneu Reached</span>
+                                <span class="text-white text-capitalize">Revenue Reached</span>
                                 <span class="text-white text-capitalize">80%</span>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-6">
+        <div class="col-xl-5">
             <div class="card card-default">
                 <div class="card-header">
                     <h2>Last Activities</h2>
@@ -111,19 +111,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
+        <div class="col-xl-7">
             <div class="card card-default">
                 <div class="card-header align-items-center">
-                    <h2 class="">Wondersite's Templates</h2>
-                    <a href="#" class="btn btn-primary btn-sm btn-pill" data-toggle="modal" data-target="#modal-stock">Add Template</a>
+                    <h2 class="">Products</h2>
+                    <a href="#" class="btn btn-primary btn-sm btn-pill" data-toggle="modal" data-target="#modal-stock">Add Product</a>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <table id="product-sale" class="table table-product " style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Template Name</th>
-                                    <th>Total Used</th>
+                                    <th>Product Name</th>
                                     <th>Price</th>
                                     <th>%used</th>
                                     <th class="th-width-250"></th>
@@ -132,8 +131,7 @@
                             <tbody>
                                 <tr>
                                     <td>Coach Swagger</td>
-                                    <td>134</td>
-                                    <td>$24541</td>
+                                    <td>500.000</td>
                                     <td>35.28%</td>
                                     <td>
                                         <div class="progress progress-md rounded-0">
@@ -143,8 +141,7 @@
                                 </tr>
                                 <tr>
                                     <td>Gucci Watch</td>
-                                    <td>32</td>
-                                    <td>$554</td>
+                                    <td>500.000</td>
                                     <td>8%</td>
                                     <td>
                                         <div class="progress progress-md rounded-0">

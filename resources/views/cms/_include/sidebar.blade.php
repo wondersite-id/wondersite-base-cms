@@ -10,19 +10,25 @@
         <li class="section-title">
             Website Management
         </li>
-        <li>
+        <li class="{{ Request::is('features', 'features/*') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('features.index') }}">
-                <i class="mdi mdi-feature-search"></i>
+                <i class="mdi mdi-hexagon-multiple"></i>
                 <span class="nav-text">Features</span>
             </a>
         </li>
-        <li>
+        <li class="{{ Request::is('seo', 'seo/*') ? 'active' : '' }}">
+            <a class="sidenav-item-link" href="{{ route('features.index') }}">
+                <i class="mdi mdi-cloud-search-outline"></i>
+                <span class="nav-text">SEO</span>
+            </a>
+        </li>
+        <li class="{{ Request::is('menus', 'menus/*') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('menus.index') }}">
                 <i class="mdi mdi-menu-open"></i>
                 <span class="nav-text">Menus</span>
             </a>
         </li>
-        <li>
+        <li class="{{ Request::is('utilities', 'utilities/*') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('utilities.index', ['type' => 'home']) }}">
                 <i class="mdi mdi-wrench"></i>
                 <span class="nav-text">Utilities</span>

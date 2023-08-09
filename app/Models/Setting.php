@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Models\Traits\HasSpatieMedia;
-use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Image\Manipulations;
@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Setting extends Model implements HasMedia
 {
-    use HasUuid, HasFactory, HasSpatieMedia;
+    use HasFactory, HasSpatieMedia;
     use LogsActivity, InteractsWithMedia;
 
     const SETTING_TYPE = [
@@ -58,6 +58,52 @@ class Setting extends Model implements HasMedia
     }
 
     /**
+     * Get the value indicating whether the IDs are incrementing.
+     *
+     * @return bool
+     */
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    /**
+     * Get the auto-incrementing key type.
+     *
+     * @return string
+     */
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
+    /**
+     * Boot function of the model
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if ($model->getKey() === null) {
+                $model->setAttribute($model->getKeyName(), Str::uuid()->toString());
+            }
+        });
+
+        static::saved(function ($model) {
+            $cacheName = "setting.{$model->name}";
+            \Cache::forget($cacheName);
+        });
+
+        static::deleted(function ($model) {
+            $cacheName = "setting.{$model->name}";
+            \Cache::forget($cacheName);
+        });
+    }
+
+    /**
      * Register media conversion for cropping media to specific dimension.
      *
      * @param Media $media|null
@@ -74,5 +120,41 @@ class Setting extends Model implements HasMedia
             $this->addMediaConversion('big')
                 ->fit(Manipulations::FIT_CROP, 1394, 974);
         }
+    }
+
+    /**
+     * Find setting by name
+     *
+     * @param string $name
+     */
+    public static function findByName($name)
+    {
+        return static::whereName($name)->first();
+    }
+
+    /**
+     * Get function
+     *
+     * @param string $name
+     */
+    public static function get($name, $default = '')
+    {
+        $cacheName = "setting.$name";
+        $value = \Cache::get($cacheName) ?: $default;
+
+        if (\Schema::hasTable('settings')) {
+            if ($value === null || $value === '') {
+                $instance = static::findByName($name);
+                $value = $default;
+
+                if ($instance) {
+                    $value = $instance->value;
+                }
+
+                \Cache::put($cacheName, $value, 120);
+            }
+        }
+
+        return $value;
     }
 }
