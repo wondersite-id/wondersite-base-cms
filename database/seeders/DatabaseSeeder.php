@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             MenuSeeder::class,
-            SettingVersion1Seeder::class,
+            BaseSettingSeeder::class,
         ]);
     }
 }

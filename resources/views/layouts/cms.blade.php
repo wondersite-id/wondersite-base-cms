@@ -30,7 +30,7 @@
                     <div class="app-brand">
                         <a href="{{ route('dashboard') }}">
                         <img height="40%" src="{{ asset('cms/images/logo.png') }}" alt="Mono">
-                        <span class="brand-name">WONDERSITE.ID</span>
+                        <span class="brand-name">{{ strtoupper(Setting::get('home-website-name')) }}</span>
                         </a>
                     </div>
                     @include('cms._include.sidebar')

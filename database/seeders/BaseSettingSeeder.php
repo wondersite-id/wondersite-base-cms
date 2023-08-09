@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Setting;
 use Illuminate\Database\Seeder;
 
-class SettingVersion1Seeder extends Seeder
+class BaseSettingSeeder extends Seeder
 {
     // wysiwyg, text, textarea, image, switch
 
@@ -15,6 +15,14 @@ class SettingVersion1Seeder extends Seeder
     public function run(): void
     {
         $settings = [
+            [
+                'name' => 'home-website-name',
+                'type' => 'home',
+                'form_type' => 'text',
+                'title' => 'Home Website Name',
+                'description' => 'Website name will be shown on every page and CMS header',
+                'value' => 'Wondersite',
+            ],
             [
                 'name' => 'home-banner-title',
                 'type' => 'home',
