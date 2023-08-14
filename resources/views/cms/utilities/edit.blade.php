@@ -112,7 +112,7 @@
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 @elseif ($model->form_type == "wysiwyg")
-                    <textarea id="value" class="form-control @error('value') is-invalid @enderror" name="value">
+                    <textarea id="value" class="wysiwyg form-control @error('value') is-invalid @enderror" name="value">
                         {{ old('value', $model->value) }}
                     </textarea>
                     @error('value')

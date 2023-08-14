@@ -5,7 +5,7 @@
   <head>
   @include('cms._include.meta')
 
-  <title>wondersite.id - Login</title>
+  <title>{{ Utility::get('home-website-name') }} - Login</title>
 
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
@@ -29,8 +29,8 @@
                   <div class="card-header pb-0">
                     <div class="app-brand w-100 d-flex justify-content-center border-bottom-0">
                       <a class="w-auto pl-0" href="/">
-                        <img height="50px" src="{{ asset('cms/images/logo.png') }}" alt="Mono">
-                        <span class="brand-name text-dark">{{ Setting::get('home-website-name') }}</span>
+                        <img height="50px" src="{{ asset('cms/images/logo.png') }}" alt="Logo">
+                        <span class="brand-name text-dark">{{ Utility::get('home-website-name') }}</span>
                       </a>
                     </div>
                   </div>
@@ -54,8 +54,7 @@
                       @endif
                       <div class="row">
                         <div class="form-group col-md-12 mb-4">
-                          <input type="email" class="form-control input-lg" id="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                          <input type="email" class="form-control input-lg" id="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                         </div>
                         <div class="form-group col-md-12 ">
                           <input type="password" class="form-control input-lg" id="password" name="password" placeholder="Password">

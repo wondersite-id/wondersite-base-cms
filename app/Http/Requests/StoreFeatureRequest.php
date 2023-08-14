@@ -27,6 +27,14 @@ class StoreFeatureRequest extends FormRequest
             'sequence_number' => 'integer|min:1',
             'image' => 'required|image|max:2048',
             'published_at' => '',
+
+            // seo
+            'seo_title' => 'required',
+            'seo_description' => 'required',
+            'seo_image' => '',
+            'seo_author' => '',
+            'seo_robots' => '',
+            'seo_canonical_url' => 'url',
         ];
     }
 }

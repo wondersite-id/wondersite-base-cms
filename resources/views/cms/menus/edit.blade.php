@@ -102,7 +102,6 @@
 
 @section('js')
     @parent
-    @include('cms._include.tinymce')
     <script>
         image.onchange = evt => {
             preview = document.getElementById('image-preview');

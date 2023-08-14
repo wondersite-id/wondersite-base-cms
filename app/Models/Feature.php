@@ -7,6 +7,7 @@ use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use PawelMysior\Publishable\Publishable;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Image\Manipulations;
@@ -19,7 +20,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Feature extends Model implements HasMedia
 {
-    use HasSlug, HasFactory, HasUuid, HasSpatieMedia;
+    use HasSlug, HasFactory, HasUuid, HasSEO, HasSpatieMedia;
     use LogsActivity, Publishable, InteractsWithMedia;
 
     /**
@@ -32,7 +33,8 @@ class Feature extends Model implements HasMedia
         'slug',
         'description',
         'sequence_number',
-        'image'
+        'image',
+        'published_at'
     ];
 
     /**

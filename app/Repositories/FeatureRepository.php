@@ -29,15 +29,32 @@ class FeatureRepository implements FeatureRepositoryInterface
 
     public function create(array $featureDetails)
     {
-        return Feature::create($featureDetails);
+        $feature = Feature::create($featureDetails);
+        $feature->seo->update([
+            'title' => $featureDetails['seo_title'],
+            'description' => $featureDetails['seo_description'],
+            'image' => $featureDetails['seo_image'],
+            'author' => $featureDetails['seo_author'],
+            'robots' => $featureDetails['seo_robots'],
+            'canonical_url' => $featureDetails['seo_canonical_url'],
+        ]);
     }
 
     public function update($featureId, array $newDetails)
     {
-        $Feature = Feature::find($featureId);
+        $feature = Feature::find($featureId);
         foreach ($newDetails as $column => $value) {
-            $Feature->{$column} = $value;
+            $feature->{$column} = $value;
         }
-        $Feature->save();
+        $feature->save();
+
+        $feature->seo->update([
+            'title' => $newDetails['seo_title'],
+            'description' => $newDetails['seo_description'],
+            'image' => $newDetails['seo_image'],
+            'author' => $newDetails['seo_author'],
+            'robots' => $newDetails['seo_robots'],
+            'canonical_url' => $newDetails['seo_canonical_url'],
+        ]);
     }
 }
