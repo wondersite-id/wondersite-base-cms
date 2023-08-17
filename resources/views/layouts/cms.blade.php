@@ -41,7 +41,6 @@
                 <div class="content-wrapper">
                     <div class="content">
                         @yield('content')
-
                         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutConfirm"aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">

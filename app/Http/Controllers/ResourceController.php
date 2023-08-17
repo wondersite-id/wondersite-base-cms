@@ -39,5 +39,7 @@ class ResourceController extends Controller
             $model->clearMediaCollection(Str::plural($field));
             // TO-DO check for empty request in edit form
         }
+
+        return $model;
     }
 }

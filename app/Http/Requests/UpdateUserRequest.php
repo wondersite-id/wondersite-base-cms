@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'email' => 'required|email:rfc,dns',
             'name' => 'required',
-            'is_active' => '',
+            'is_active' => 'nullable',
         ];
     }
 }

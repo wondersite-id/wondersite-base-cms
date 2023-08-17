@@ -1,6 +1,6 @@
 @extends('layouts.cms')
  
-@section('title', $title)
+@section('title', strtoupper($title))
 
 @section('description', $description)
 

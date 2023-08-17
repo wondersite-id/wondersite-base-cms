@@ -23,7 +23,7 @@ class UpdateUtilityRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'form_type' => '',
+            'form_type' => 'nullable',
             'description' => 'required',
             'value' => 'required_unless:form_type,image,switch'
         ];

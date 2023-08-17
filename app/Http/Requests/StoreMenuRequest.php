@@ -28,8 +28,8 @@ class StoreMenuRequest extends FormRequest
             'type' => Rule::in(['header', 'footer']),
             'sequence_number' => 'integer|min:1',
             'url' => 'required',
-            'published_at' => '',
-            'is_open_in_new_tab' => '',
+            'published_at' => 'nullable',
+            'is_open_in_new_tab' => 'nullable',
         ];
     }
 }

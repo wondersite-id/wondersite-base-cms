@@ -88,6 +88,17 @@ class FeatureController extends ResourceController
         $feature = $this->repository->create($data);
         $this->attachMediaToModel($request, $feature, 'image', $uploadedImage);
 
+        $createdFeature = $this->repository->findById($feature->id);
+        $image = $createdFeature->getFirstMedia("images");
+        $createdFeature->seo->update([
+            'title' => $data['seo_title'],
+            'description' => $data['seo_description'],
+            'robots' => $data['seo_robots'],
+            'canonical_url' => $data['seo_canonical_url'],
+            'image' => $image != null ? $image->getUrl() : '',
+            'author' => \Auth::user()->name,
+        ]);
+
         session()->flash('message', 'Successfully saved new feature data');
         return redirect()->route($this->routePath . '.index');
     }
@@ -127,7 +138,22 @@ class FeatureController extends ResourceController
             $data['published_at'] = null;
         }
 
+        $seoTitle = Arr::pull($data, 'seo_title');
+        $seoDescription = Arr::pull($data, 'seo_description');
+        $seoRobots = Arr::pull($data, 'seo_robots');
+        $seoCanonicalUrl = Arr::pull($data, 'seo_canonical_url');
         $this->repository->update($feature->id, $data);
+
+        $updatedFeature = $this->repository->findById($feature->id);
+        $image = $updatedFeature->getFirstMedia("images");
+        $updatedFeature->seo->update([
+            'title' => $seoTitle,
+            'description' => $seoDescription,
+            'robots' => $seoRobots,
+            'canonical_url' => $seoCanonicalUrl,
+            'image' => $image ? $image->getUrl() : '',
+            'author' => \Auth::user()->name,
+        ]);
 
         session()->flash('message', 'Successfully updated feature data');
         return redirect()->route($this->routePath . '.show', $feature);
