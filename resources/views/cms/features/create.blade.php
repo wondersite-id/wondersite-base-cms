@@ -87,7 +87,7 @@
         <hr />
         <div class="card-header">
             <h2>SEO</h2>
-            <a class="btn mdi mdi-spin mdi-file-replace-outline" role="button">&nbsp;&nbsp;Auto Fill&nbsp;</a>
+            <a id="auto-fill-btn" data-title="name" data-description="description" class="btn mdi mdi-spin mdi-file-replace-outline" role="button">&nbsp;&nbsp;Auto Fill&nbsp;</a>
         </div>
         <div class="card-body">
             <div class="form-group">
@@ -127,12 +127,17 @@
             <div class="form-group">
                 <label for="seo_image">SEO Image</label>
                 <br>
-                It will be taken automatically from this data's image
+                <small>It will be taken automatically from this data's image</small>
+                <br>
+                <img id="seo-image-preview" height="150px" src="#" alt="Uploaded image" class="mt-3" style="display:none;"/>
             </div>
             <div class="form-group">
-                <label for="seo_author">SEO Author</label>
+                <label for="seo_author">
+                    SEO Author: {{ Auth::user()->name }}
+                </label>
                 <br>
-                It will be filled automatically from authenticated user's name
+                <small>It will be filled automatically from authenticated user's name</small>
+                <br>
             </div>
                
             @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
@@ -149,9 +154,12 @@
         image.onchange = evt => {
             preview = document.getElementById('image-preview');
             preview.style.display = 'block';
+            seoPreview = document.getElementById('seo-image-preview');
+            seoPreview.style.display = 'block';
             const [file] = image.files
             if (file) {
                 preview.src = URL.createObjectURL(file)
+                seoPreview.src = URL.createObjectURL(file)
             }
         }
     </script>

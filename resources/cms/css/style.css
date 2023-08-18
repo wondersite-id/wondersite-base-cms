@@ -152,12 +152,12 @@ sup {
 }
 
 a {
-  color: #6dcde0;
+  color: #484894;
   text-decoration: none;
   background-color: transparent;
 }
 a:hover {
-  color: #484894;
+  color: #6dcde0;
   text-decoration: underline;
 }
 

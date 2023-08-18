@@ -18,7 +18,7 @@ class SEOController extends ResourceController
         $this->routePath = "seos";
         view()->share([
             'title' => ucfirst($this->routePath),
-            'description' => 'SEO will be used for optimization website on google search.',
+            'description' => 'SEO will be used for optimization website on Google search.',
             'routePrefix' => $this->routePath,
         ]);
     }

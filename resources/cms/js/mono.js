@@ -1,31 +1,8 @@
-/**
- * WEBSITE: https://themefisher.com
- * TWITTER: https://twitter.com/themefisher
- * FACEBOOK: https://www.facebook.com/themefisher
- * GITHUB: https://github.com/themefisher/
- */
 
-/* ====== Index ======
-
-1. SCROLLBAR SIDEBAR
-2. MOBILE OVERLAY
-3. SIDEBAR MENU
-4. SIDEBAR TOGGLE FOR MOBILE
-5. SIDEBAR TOGGLE FOR VARIOUS SIDEBAR LAYOUT
-6. TODO LIST
-7. RIGHT SIDEBAR
-8. OFFCANVAS
-9. DROPDOWN NOTIFY
-10. REFRESS BUTTON
-11. NAVBAR TRANSPARENT SCROLL
-12. NAVBAR SEARCH
-====== End ======*/
 
 $(document).ready(function () {
   "use strict";
-
   /*======== 1. SCROLLBAR SIDEBAR ========*/
-
   /*======== 2. MOBILE OVERLAY ========*/
   if ($(window).width() < 768) {
     $(".sidebar-toggle").on("click", function () {
@@ -342,4 +319,18 @@ $(document).ready(function () {
         break;
     }
   });
+
+  $('#auto-fill-btn').on('click', function() {
+    var titleID = $(this).data('title')
+    var descriptionID =  $(this).data('description')
+    let descriptionText = tinyMCE.get(descriptionID).getContent({format : 'raw'})
+    descriptionText.replace(/<[^>]+>/ig,"");
+    var div = document.createElement("div");
+    div.innerHTML = descriptionText;
+    var text = div.textContent || div.innerText || "";
+
+    $('#seo_title').val($('#' + titleID).val())
+    $('#seo_description').val(text);
+  });
+
 });

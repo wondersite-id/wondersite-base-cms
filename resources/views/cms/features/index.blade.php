@@ -30,7 +30,7 @@
             @yield('description')
         </p>
         <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
-            <i class="mdi mdi-plus"></i>
+            <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
     </div>

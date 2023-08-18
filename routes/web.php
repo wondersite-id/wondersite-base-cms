@@ -6,8 +6,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SEOController;
+use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,8 +50,8 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::resource('menus', MenuController::class);
 
     // Setting or Utilites Routes
-    Route::get('utilities/historical-changes/{utility}', [SettingController::class, 'historicalChanges'])->name('utilities.historical-changes');
-    Route::resource('utilities', SettingController::class)->except(['create', 'store', 'destroy']);
+    Route::get('utilities/historical-changes/{utility}', [UtilityController::class, 'historicalChanges'])->name('utilities.historical-changes');
+    Route::resource('utilities', UtilityController::class)->except(['create', 'store', 'destroy']);
 
     // SEO Routes
     Route::get('seos/historical-changes/{seo}', [SEOController::class, 'historicalChanges'])->name('seo.historical-changes');

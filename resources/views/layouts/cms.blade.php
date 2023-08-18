@@ -105,7 +105,6 @@
         <script src="{{ asset('cms/plugins/ladda/spin.min.js') }}"></script>
         <script src="{{ asset('cms/plugins/ladda/ladda.min.js') }}"></script>
         <script src="{{ asset('cms/js/mono.js') }}"></script>
-        <script src="{{ asset('cms/js/custom.js') }}"></script>
         @show
     </body>
 </html>
