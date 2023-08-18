@@ -5,11 +5,11 @@ namespace App\Providers;
 use App\Interfaces\FeatureRepositoryInterface;
 use App\Interfaces\MenuRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
-use App\Interfaces\SettingRepositoryInterface;
+use App\Interfaces\UtilityRepositoryInterface;
 use App\Repositories\FeatureRepository;
 use App\Repositories\MenuRepository;
 use App\Repositories\UserRepository;
-use App\Repositories\SettingRepository;
+use App\Repositories\UtilityRepository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,8 +33,8 @@ class AppServiceProvider extends ServiceProvider
             MenuRepository::class
         );
         $this->app->bind(
-            SettingRepositoryInterface::class,
-            SettingRepository::class
+            UtilityRepositoryInterface::class,
+            UtilityRepository::class
         );
     }
 

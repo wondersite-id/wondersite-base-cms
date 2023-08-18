@@ -27,7 +27,13 @@ class UpdateFeatureRequest extends FormRequest
             'description' => 'required',
             'sequence_number' => 'integer|min:1',
             'image' => 'image|max:2048',
-            'published_at' => ''
+            'published_at' => 'nullable',
+
+            // seo
+            'seo_title' => 'required',
+            'seo_description' => 'required',
+            'seo_robots' => 'nullable',
+            'seo_canonical_url' => 'nullable|url',
         ];
     }
 }

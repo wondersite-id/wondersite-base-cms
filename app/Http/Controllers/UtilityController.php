@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateSettingRequest;
-use App\Interfaces\SettingRepositoryInterface;
-use App\Models\Setting;
+use App\Http\Requests\UpdateUtilityRequest;
+use App\Interfaces\UtilityRepositoryInterface;
+use App\Models\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 
-class SettingController extends ResourceController
+class UtilityController extends ResourceController
 {
-    private SettingRepositoryInterface $repository;
+    private UtilityRepositoryInterface $repository;
 
     /**
      * Construct controller
      */
-    public function __construct(SettingRepositoryInterface $repo)
+    public function __construct(UtilityRepositoryInterface $repo)
     {
         $this->repository = $repo;
-        $this->viewPath = "settings";
+        $this->viewPath = "utilities";
         $this->routePath = "utilities";
         view()->share([
             'title' => ucfirst($this->routePath),
@@ -49,7 +49,7 @@ class SettingController extends ResourceController
         }
 
         $type = $request->get('type');
-        if ($type == null || !in_array($type, Setting::SETTING_TYPE)) {
+        if ($type == null || !in_array($type, Utility::SETTING_TYPE)) {
             return redirect()->route($this->routePath . '.index', ['type' => 'home']);
         }
 
@@ -59,7 +59,7 @@ class SettingController extends ResourceController
     /**
      * Display the specified resource.
      */
-    public function show(Setting $utility)
+    public function show(Utility $utility)
     {
         return view('cms.' . $this->viewPath . '.show', ['model' => $utility]);
     }
@@ -67,7 +67,7 @@ class SettingController extends ResourceController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Setting $utility)
+    public function edit(Utility $utility)
     {
         return view('cms.' . $this->viewPath . '.edit', ['model' => $utility]);
     }
@@ -75,7 +75,7 @@ class SettingController extends ResourceController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSettingRequest $request, Setting $utility)
+    public function update(UpdateUtilityRequest $request, Utility $utility)
     {
         $data = $request->validated();
         // wysiwyg, text, textarea, image, switch
@@ -101,7 +101,7 @@ class SettingController extends ResourceController
     /**
      * Show the form for showing historical changes the specified resource.
      */
-    public function historicalChanges(Setting $utility)
+    public function historicalChanges(Utility $utility)
     {
         $activities = Activity::whereSubjectType(get_class($utility))
             ->whereSubjectId($utility->id)

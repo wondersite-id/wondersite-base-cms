@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
-class Setting extends Model implements HasMedia
+class Utility extends Model implements HasMedia
 {
     use HasFactory, HasSpatieMedia;
     use LogsActivity, InteractsWithMedia;
@@ -53,7 +53,7 @@ class Setting extends Model implements HasMedia
                 'description',
                 'value',
             ])
-            ->useLogName('setting')
+            ->useLogName('utility')
             ->logOnlyDirty();
     }
 
@@ -93,12 +93,12 @@ class Setting extends Model implements HasMedia
         });
 
         static::saved(function ($model) {
-            $cacheName = "setting.{$model->name}";
+            $cacheName = "utility.{$model->name}";
             \Cache::forget($cacheName);
         });
 
         static::deleted(function ($model) {
-            $cacheName = "setting.{$model->name}";
+            $cacheName = "utility.{$model->name}";
             \Cache::forget($cacheName);
         });
     }
@@ -139,10 +139,10 @@ class Setting extends Model implements HasMedia
      */
     public static function get($name, $default = '')
     {
-        $cacheName = "setting.$name";
+        $cacheName = "utility.$name";
         $value = \Cache::get($cacheName) ?: $default;
 
-        if (\Schema::hasTable('settings')) {
+        if (\Schema::hasTable('utilities')) {
             if ($value === null || $value === '') {
                 $instance = static::findByName($name);
                 $value = $default;

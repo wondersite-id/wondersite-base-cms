@@ -2,6 +2,13 @@
  
 @section('title', $title)
 
+@section('badge')
+    <span class="badge badge-dark badge-pill">
+        <i class="mdi mdi-search-web"></i>
+        SEO
+    </span>
+@endsection
+
 @section('description', $description)
 
 @section('css')
@@ -24,7 +31,7 @@
             @yield('description')
         </p>
         <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
-            <i class="mdi mdi-plus"></i>
+            <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
     </div>
@@ -42,6 +49,9 @@
                 <a class="nav-link" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
         </ul>
+    </div>
+    <div class="card-header">
+        <h2>Feature</h2>
     </div>
     <div class="card-body card-profile-body">
         <div class="form-group">
@@ -79,6 +89,42 @@
             @else
                 <span class="badge badge-secondary">Unpublished</span>
             @endif
+        </div>
+    </div>
+    <hr />
+    <div class="card-header">
+        <h2>SEO</h2>
+    </div>
+    <div class="card-body card-profile-body">
+        <div class="form-group">
+            <label for="title">SEO Title</label>
+            <br>
+            {{ $model->seo->title }}
+        </div>
+        <div class="form-group">
+            <label for="description">SEO Description</label>
+            <br>
+            {!! $model->seo->description !!}
+        </div>
+        <div class="form-group">
+            <label for="image">SEO Image</label>
+            <br>
+            <img id="image-preview" height="150px" src="{{ $model->seo->image }}" alt="Uploaded image" class="mt-3"/>
+        </div>
+        <div class="form-group">
+            <label for="author">SEO Author</label>
+            <br>
+            {{ $model->seo->author ?: '-' }}
+        </div>
+        <div class="form-group">
+            <label for="robots">SEO Robots Tag</label>
+            <br>
+            {{ $model->seo->robots ?: '-' }}
+        </div>
+        <div class="form-group">
+            <label for="canonical_url">SEO Canonical URL</label>
+            <br>
+            {{ $model->seo->canonical_url ?: '-' }}
         </div>
         <hr />
         @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])

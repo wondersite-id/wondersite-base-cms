@@ -34,10 +34,12 @@ class FeatureRepository implements FeatureRepositoryInterface
 
     public function update($featureId, array $newDetails)
     {
-        $Feature = Feature::find($featureId);
+        $feature = Feature::find($featureId);
         foreach ($newDetails as $column => $value) {
-            $Feature->{$column} = $value;
+            $feature->{$column} = $value;
         }
-        $Feature->save();
+        $feature->save();
+
+        return $feature;
     }
 }

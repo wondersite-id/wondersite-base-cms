@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSettingRequest extends FormRequest
+class UpdateUtilityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class UpdateSettingRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'form_type' => '',
+            'form_type' => 'nullable',
             'description' => 'required',
             'value' => 'required_unless:form_type,image,switch'
         ];

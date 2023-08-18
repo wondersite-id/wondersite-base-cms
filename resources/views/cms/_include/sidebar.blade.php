@@ -16,8 +16,8 @@
                 <span class="nav-text">Features</span>
             </a>
         </li>
-        <li class="{{ Request::is('seo', 'seo/*') ? 'active' : '' }}">
-            <a class="sidenav-item-link" href="{{ route('features.index') }}">
+        <li class="{{ Request::is('seos', 'seos/*') ? 'active' : '' }}">
+            <a class="sidenav-item-link" href="{{ route('seos.index') }}">
                 <i class="mdi mdi-cloud-search-outline"></i>
                 <span class="nav-text">SEO</span>
             </a>

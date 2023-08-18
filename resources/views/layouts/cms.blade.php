@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-        <meta name="theme-name" content="mono" />
+        <meta name="theme-name" content="wondersite" />
         @include('cms._include.meta')
-        <title>wondersite.id - @yield('title') </title>
+        <title>{{ Utility::get('home-website-name') }} - @yield('title') </title>
         @section('css')
         <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
         <link href="{{ asset('cms/plugins/material/css/materialdesignicons.min.css') }}" rel="stylesheet" />
@@ -29,8 +29,8 @@
                 <div id="sidebar" class="sidebar sidebar-with-footer">
                     <div class="app-brand">
                         <a href="{{ route('dashboard') }}">
-                        <img height="40%" src="{{ asset('cms/images/logo.png') }}" alt="Mono">
-                        <span class="brand-name">{{ strtoupper(Setting::get('home-website-name')) }}</span>
+                        <img height="40%" src="{{ asset('cms/images/logo.png') }}" alt="Logo">
+                        <span class="brand-name">{{ strtoupper(Utility::get('home-website-name')) }}</span>
                         </a>
                     </div>
                     @include('cms._include.sidebar')
@@ -41,7 +41,6 @@
                 <div class="content-wrapper">
                     <div class="content">
                         @yield('content')
-
                         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutConfirm"aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -106,7 +105,6 @@
         <script src="{{ asset('cms/plugins/ladda/spin.min.js') }}"></script>
         <script src="{{ asset('cms/plugins/ladda/ladda.min.js') }}"></script>
         <script src="{{ asset('cms/js/mono.js') }}"></script>
-        <script src="{{ asset('cms/js/custom.js') }}"></script>
         @show
     </body>
 </html>

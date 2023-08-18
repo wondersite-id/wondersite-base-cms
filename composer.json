@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "pawelmysior/laravel-publishable": "^3.0",
+        "ralphjsmit/laravel-seo": "^1.4",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-medialibrary": "^10.11",
         "spatie/laravel-sluggable": "^3.5",

@@ -1,6 +1,6 @@
 @extends('layouts.cms')
  
-@section('title', $title)
+@section('title', strtoupper($title))
 
 @section('description', $description)
 
@@ -13,19 +13,15 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route($routePrefix . '.index') }}">List of Administrators</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List of SEO</li>
     </ol>
 </nav>
 <div class="card card-default">
     <div class="card-body text-center">
-        <h3 class="card-title">List of Administrators</h3>
+        <h3 class="card-title">List of SEO</h3>
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
-            <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
-            &nbsp;Create New @yield('title')
-        </a>
     </div>
 </div>
 <div class="card card-default">
@@ -34,36 +30,14 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th>Model Type</th>
+                    <th>Model Name</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-    </div>
-</div>
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirm" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteConfirm">Delete Confirmation</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Are you sure to delete the data?</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <form id="deleteForm" method="POST" action="#">
-                    @csrf
-                    @method('DELETE')
-
-                    <input type="submit" class="btn btn-primary delete-user" value="Delete" />
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
@@ -87,8 +61,8 @@
             ajax: "{{ route($routePrefix . '.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'name', name: 'name'},
-                {data: 'email', name: 'email'},
+                {data: 'model_url', name: 'model_url'},
+                {data: 'model_name', name: 'model_name'},
                 {
                     data: 'action', 
                     name: 'action', 
@@ -97,12 +71,6 @@
                 },
             ]
         });
-
-        $(document).on('click','body .delete-btns',function(){
-            var id = $(this).attr('data-id')
-            $('#deleteForm').attr('action', "{{ url('users') }}"+ "/" + id)
-        });
-        
     });
     </script>
 @endsection

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Setting;
+use App\Models\Utility;
 use Illuminate\Database\Seeder;
 
-class BaseSettingSeeder extends Seeder
+class BaseUtilitySeeder extends Seeder
 {
     // wysiwyg, text, textarea, image, switch
 
@@ -14,7 +14,7 @@ class BaseSettingSeeder extends Seeder
      */
     public function run(): void
     {
-        $settings = [
+        $utilities = [
             [
                 'name' => 'home-website-name',
                 'type' => 'home',
@@ -260,10 +260,10 @@ class BaseSettingSeeder extends Seeder
             ],
         ];
 
-        foreach ($settings as $value) {
-            $setting = Setting::updateOrCreate(['name' => $value['name']], $value);
+        foreach ($utilities as $value) {
+            $utility = Utility::updateOrCreate(['name' => $value['name']], $value);
             if ($value['form_type'] == "image") {
-                $setting->saveImageUrl('value', $value['value'], 'url');
+                $utility->saveImageUrl('value', $value['value'], 'url');
             }
         }
     }
