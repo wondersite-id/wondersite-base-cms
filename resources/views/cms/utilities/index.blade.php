@@ -12,13 +12,13 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List of Utilities</li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List of {{ $title }}</li>
     </ol>
 </nav>
 <div class="card card-default">
     <div class="card-body text-center">
-        <h3 class="card-title">List of Utilities</h3>
+        <h3 class="card-title">List of {{ $title }}</h3>
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
@@ -29,13 +29,13 @@
         <div class="p-12">
             <ul class="nav nav-custom-pills mb-3 justify-content-center" id="pills-tab-custom" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->get('type') == 'home' ? 'active' : '' }}" id="pills-home-tab"  href="{{ route($routePrefix . '.index', ['type' => 'home']) }}" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                    <a class="nav-link {{ request()->get('type') == 'home' ? 'active' : '' }}" id="pills-home-tab"  href="{{ route('cms.'.$routePrefix . '.index', ['type' => 'home']) }}" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->get('type') == 'footer' ? 'active' : '' }}" id="pills-footer-tab"  href="{{ route($routePrefix . '.index', ['type' => 'footer']) }}" role="tab" aria-controls="pills-footer" aria-selected="false">Footer</a>
+                    <a class="nav-link {{ request()->get('type') == 'footer' ? 'active' : '' }}" id="pills-footer-tab"  href="{{ route('cms.'.$routePrefix . '.index', ['type' => 'footer']) }}" role="tab" aria-controls="pills-footer" aria-selected="false">Footer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->get('type') == 'other' ? 'active' : '' }}" id="pills-other-tab"  href="{{ route($routePrefix . '.index', ['type' => 'other']) }}" role="tab" aria-controls="pills-other" aria-selected="false">Other</a>
+                    <a class="nav-link {{ request()->get('type') == 'other' ? 'active' : '' }}" id="pills-other-tab"  href="{{ route('cms.'.$routePrefix . '.index', ['type' => 'other']) }}" role="tab" aria-controls="pills-other" aria-selected="false">Other</a>
                 </li>
             </ul>
             <div class="tab-content mt-5" id="nav-tabContent">
@@ -75,7 +75,7 @@
             processing: true,
             serverSide: true,
             bLengthChange: false,
-            ajax: "{{ route($routePrefix . '.index', ['type' => request()->get('type')]) }}",
+            ajax: "{{ route('cms.'.$routePrefix . '.index', ['type' => request()->get('type')]) }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},

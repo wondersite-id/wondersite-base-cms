@@ -19,8 +19,8 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Features</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.'.$routePrefix . '.index') }}">List of {{ $title }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Add Feature</li>
     </ol>
 </nav>
@@ -33,10 +33,10 @@
     </div>
 </div>
 <div class="card card-default">
-    <form method="POST" action="{{ route($routePrefix . '.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('cms.'.$routePrefix . '.store') }}" enctype="multipart/form-data">
     @csrf
         <div class="card-header">
-            <h2>Feature</h2>
+            <h2>New Feature</h2>
         </div>
         <div class="card-body">
             <div class="form-group">
@@ -140,7 +140,7 @@
                 <br>
             </div>
                
-            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
+            @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
             @include('cms._include.buttons.save') 
         </div>
     </form>

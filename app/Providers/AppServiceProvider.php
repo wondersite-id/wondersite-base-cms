@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ArticleTypeRepositoryInterface;
+use App\Interfaces\ArticleRepositoryInterface;
 use App\Interfaces\FeatureRepositoryInterface;
 use App\Interfaces\MenuRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
 use App\Interfaces\UtilityRepositoryInterface;
+use App\Repositories\ArticleTypeRepository;
+use App\Repositories\ArticleRepository;
 use App\Repositories\FeatureRepository;
 use App\Repositories\MenuRepository;
 use App\Repositories\UserRepository;
@@ -35,6 +39,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UtilityRepositoryInterface::class,
             UtilityRepository::class
+        );
+        $this->app->bind(
+            ArticleRepositoryInterface::class,
+            ArticleRepository::class
+        );
+        $this->app->bind(
+            ArticleTypeRepositoryInterface::class,
+            ArticleTypeRepository::class
         );
     }
 

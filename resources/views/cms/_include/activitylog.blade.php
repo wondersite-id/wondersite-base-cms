@@ -18,7 +18,7 @@
                             <b>Causer:</b>
                             @if ($activity->causer)
                                 @if (Auth::user()->isAdmin())
-                                <a href="{{ route($activity->causer->isAdmin() ? "administrators.show":"customers.show", $activity->causer->id) }}">{{ $activity->causer->name }} - {{ $activity->causer->email }}</a> <i>{{ $activity->causer->id == Auth::user()->id ? "(It's you)" : "" }}</i>
+                                <a href="{{ route($activity->causer->isAdmin() ? "cms.administrators.show":"cms.customers.show", $activity->causer->id) }}">{{ $activity->causer->name }} - {{ $activity->causer->email }}</a> <i>{{ $activity->causer->id == Auth::user()->id ? "(It's you)" : "" }}</i>
                                 @else
                                 {{ $activity->causer->name }} - {{ $activity->causer->email }}<i>{{ $activity->causer->id == Auth::user()->id ? "(It's you)" : "" }}</i>    
                                 
@@ -76,7 +76,9 @@
         </div>
         
     </div>
-    <div class="card-footer">
-    {{ ($activities->links()) }}
-    </div>
+    @if ($activities->hasPages())
+        <div class="card-footer">
+        {{ ($activities->links()) }}
+        </div>
+    @endif
 @endif

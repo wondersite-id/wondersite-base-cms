@@ -51,7 +51,7 @@ class MenuController extends ResourceController
                     return $html;
                 })
                 ->addColumn('action', function ($row) {
-                    $showUrl = route('menus.show', $row['id']);
+                    $showUrl = route('cms.menus.show', $row['id']);
                     $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a></center>';
                     return $actionBtn;
                 })
@@ -86,7 +86,7 @@ class MenuController extends ResourceController
         $this->repository->create($data);
 
         session()->flash('message', 'Successfully saved new feature data');
-        return redirect()->route($this->routePath . '.index');
+        return redirect()->route('cms.' . $this->routePath . '.index');
     }
 
     /**
@@ -123,7 +123,7 @@ class MenuController extends ResourceController
         $this->repository->update($menu->id, $data);
 
         session()->flash('message', 'Successfully updated menu data');
-        return redirect()->route($this->routePath . '.show', $menu);
+        return redirect()->route('cms.' . $this->routePath . '.show', $menu);
     }
 
     /**
@@ -133,7 +133,7 @@ class MenuController extends ResourceController
     {
         $this->repository->delete($menu->id);
         session()->flash('message', 'Successfully deleted menu data');
-        return redirect()->route($this->routePath . '.index');
+        return redirect()->route('cms.' . $this->routePath . '.index');
     }
 
     /**

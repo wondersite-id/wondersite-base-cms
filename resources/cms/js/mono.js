@@ -323,8 +323,13 @@ $(document).ready(function () {
   $('#auto-fill-btn').on('click', function() {
     var titleID = $(this).data('title')
     var descriptionID =  $(this).data('description')
-    let descriptionText = tinyMCE.get(descriptionID).getContent({format : 'raw'})
-    descriptionText.replace(/<[^>]+>/ig,"");
+    let descriptionText = ''
+    if ($('#' + descriptionID).hasClass('tinymce')) {
+      descriptionText = tinyMCE.get(descriptionID).getContent({format : 'raw'})
+      descriptionText.replace(/<[^>]+>/ig,"");
+    } else {
+      descriptionText = $('#' + descriptionID).val()
+    }
     var div = document.createElement("div");
     div.innerHTML = descriptionText;
     var text = div.textContent || div.innerText || "";
@@ -332,5 +337,4 @@ $(document).ready(function () {
     $('#seo_title').val($('#' + titleID).val())
     $('#seo_description').val(text);
   });
-
 });

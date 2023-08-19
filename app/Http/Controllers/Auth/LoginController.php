@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function view()
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('cms.dashboard');
         }
         return view('cms.login.login');
     }

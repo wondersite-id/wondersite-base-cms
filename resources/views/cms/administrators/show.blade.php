@@ -12,8 +12,8 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Administrators</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.'.$routePrefix . '.index') }}">List of Administrators</a></li>
         <li class="breadcrumb-item active" aria-current="page">Detail of Administrator</li>
     </ol>
 </nav>
@@ -31,16 +31,16 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
+                <a class="nav-link active" href="{{ route('cms.'.$routePrefix . '.show', $model) }}">Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.edit', $model) }}">Form</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.edit', $model) }}">Form</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.change-password', $model) }}">Change Password</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.change-password', $model) }}">Change Password</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
 
         </ul>
@@ -58,14 +58,14 @@
         </div>
         <div class="form-group">
             <label for>Password</label><br>
-            <a href="{{ route($routePrefix . '.change-password', $model) }}" class="mb-1 btn btn-sm btn-outline-primary">
+            <a href="{{ route('cms.'.$routePrefix . '.change-password', $model) }}" class="mb-1 btn btn-sm btn-outline-primary">
                     <i class=" mdi mdi-key mr-1"></i>
                     Change Password
                 </a>
         </div>
-        <hr />
-        @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
-        @include('cms._include.buttons.edit', ['editUrl' => route($routePrefix . '.edit', $model)])
+        <br />
+        @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
+        @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
     </div>
 </div>
 @endsection

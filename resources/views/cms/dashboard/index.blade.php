@@ -90,7 +90,7 @@
                             <tr>
                                 <td class="col-lg-3 text-dark ">
                                     @if ($activity->causer)
-                                    <a class="text-primary" href="{{ route($activity->causer->isAdmin() ? "administrators.show":"customers.show", $activity->causer->id) }}">{{ $activity->causer->name }} ({{ $activity->causer->email }})</a> 
+                                    <a class="text-primary" href="{{ route($activity->causer->isAdmin() ? "cms.administrators.show":"cms.customers.show", $activity->causer->id) }}">{{ $activity->causer->name }} ({{ $activity->causer->email }})</a> 
                                     @else
                                     System
                                     @endif

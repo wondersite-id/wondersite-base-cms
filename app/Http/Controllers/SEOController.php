@@ -36,7 +36,7 @@ class SEOController extends ResourceController
                     $modelType = Str::replace('App\Models\\', '', $row['model_type']);
                     $routeName = Str::lower(Str::plural($modelType));
 
-                    $showUrl = route($routeName . '.show', $row['model_id']);
+                    $showUrl = route('cms.' . $routeName . '.show', $row['model_id']);
                     $modelUrl = '<b><a href="' . $showUrl . '" </a>' . $row['model_type'] . '&nbsp;<i class="mdi mdi-link-variant"></i></b>';
                     return $modelUrl;
                 })
@@ -44,7 +44,7 @@ class SEOController extends ResourceController
                     return $row->model->name;
                 })
                 ->addColumn('action', function ($row) {
-                    $showUrl = route('seos.show', $row['id']);
+                    $showUrl = route('cms.seos.show', $row['id']);
                     $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a></center>';
                     return $actionBtn;
                 })

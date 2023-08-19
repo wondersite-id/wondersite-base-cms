@@ -12,17 +12,17 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route($routePrefix . '.index') }}">List of Administrators</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('cms.'.$routePrefix . '.index') }}">List of {{ $title }}</a></li>
     </ol>
 </nav>
 <div class="card card-default">
     <div class="card-body text-center">
-        <h3 class="card-title">List of Administrators</h3>
+        <h3 class="card-title">List of {{ $title }}</h3>
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
+        <a href="{{ route('cms.'.$routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
@@ -84,7 +84,7 @@
             processing: true,
             serverSide: true,
             bLengthChange: false,
-            ajax: "{{ route($routePrefix . '.index') }}",
+            ajax: "{{ route('cms.'.$routePrefix . '.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},

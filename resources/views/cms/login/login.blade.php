@@ -28,7 +28,7 @@
                 <div class="card card-default mb-0">
                   <div class="card-header pb-0">
                     <div class="app-brand w-100 d-flex justify-content-center border-bottom-0">
-                      <a class="w-auto pl-0" href="/">
+                      <a class="w-auto pl-0" href="{{ route('cms.dashboard') }}">
                         <img height="50px" src="{{ asset('cms/images/logo.png') }}" alt="Logo">
                         <span class="brand-name text-dark">{{ Utility::get('home-website-name') }}</span>
                       </a>

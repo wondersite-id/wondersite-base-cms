@@ -28,7 +28,7 @@
             <aside class="left-sidebar sidebar-dark" id="left-sidebar">
                 <div id="sidebar" class="sidebar sidebar-with-footer">
                     <div class="app-brand">
-                        <a href="{{ route('dashboard') }}">
+                        <a href="{{ route('cms.dashboard') }}">
                         <img height="40%" src="{{ asset('cms/images/logo.png') }}" alt="Logo">
                         <span class="brand-name">{{ strtoupper(Utility::get('home-website-name')) }}</span>
                         </a>
@@ -105,6 +105,7 @@
         <script src="{{ asset('cms/plugins/ladda/spin.min.js') }}"></script>
         <script src="{{ asset('cms/plugins/ladda/ladda.min.js') }}"></script>
         <script src="{{ asset('cms/js/mono.js') }}"></script>
+        <script src="{{ asset('cms/js/custom.js') }}"></script>
         @show
     </body>
 </html>

@@ -43,7 +43,7 @@ class CustomerController extends ResourceController
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $showUrl = route('customers.show', $row['id']);
+                    $showUrl = route('cms.customers.show', $row['id']);
                     $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;' . ($row['id'] == Auth::user()->id ? '' : '<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a>') . '</center>';
                     return $actionBtn;
                 })
@@ -64,7 +64,7 @@ class CustomerController extends ResourceController
         $this->repository->create($data);
 
         session()->flash('message', 'Successfully saved new user data');
-        return redirect()->route($this->routePath . '.index');
+        return redirect()->route('cms.' . $this->routePath . '.index');
     }
 
     /**
@@ -104,7 +104,7 @@ class CustomerController extends ResourceController
         ]);
 
         session()->flash('message', 'Successfully changed the user password');
-        return redirect()->route($this->routePath . '.show', $customer);
+        return redirect()->route('cms.' . $this->routePath . '.show', $customer);
     }
 
     /**
@@ -128,7 +128,7 @@ class CustomerController extends ResourceController
         $this->repository->update($customer->id, $data);
 
         session()->flash('message', 'Successfully updated user data');
-        return redirect()->route($this->routePath . '.show', $customer);
+        return redirect()->route('cms.' . $this->routePath . '.show', $customer);
     }
 
     /**
@@ -138,6 +138,6 @@ class CustomerController extends ResourceController
     {
         $this->repository->delete($customer->id);
         session()->flash('message', 'Successfully deleted user data');
-        return redirect()->route($this->routePath . '.index');
+        return redirect()->route('cms.' . $this->routePath . '.index');
     }
 }

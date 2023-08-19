@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+todo.md
 .env
 .env.backup
 .env.production

@@ -12,8 +12,8 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Menus</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.'.$routePrefix . '.index') }}">List of {{ $title }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Detail Menu</li>
     </ol>
 </nav>
@@ -23,7 +23,7 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
-        <a href="{{ route($routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
+        <a href="{{ route('cms.'.$routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
@@ -33,15 +33,18 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
+                <a class="nav-link active" href="{{ route('cms.'.$routePrefix . '.show', $model) }}">Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.edit', $model) }}">Form</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.edit', $model) }}">Form</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
         </ul>
+    </div>
+    <div class="card-header">
+        <h2>Menu</h2>
     </div>
     <div class="card-body card-profile-body">
         <div class="form-group">
@@ -90,9 +93,9 @@
                 <span class="badge badge-secondary">No</span>
             @endif
         </div>
-        <hr />
-        @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
-        @include('cms._include.buttons.edit', ['editUrl' => route($routePrefix . '.edit', $model)])
+        <br />
+        @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
+        @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
     </div>
 </div>
 @endsection
