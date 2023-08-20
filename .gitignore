@@ -21,5 +21,6 @@ yarn-error.log
 
 /temp/*
 /public/media/*
+/storage/media-library/temp/
 
 .DS_Store*
