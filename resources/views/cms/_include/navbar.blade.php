@@ -15,7 +15,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li>
-                            <a class="dropdown-link-item" href="{{ Auth::user()->isAdmin() ? route('administrators.show',  Auth::user()) : route('customers.show',  Auth::user())}}">
+                            <a class="dropdown-link-item" href="{{ Auth::user()->isAdmin() ? route('cms.administrators.show',  Auth::user()) : route('cms.customers.show',  Auth::user())}}">
                             <i class="mdi mdi-account-outline"></i>
                             <span class="nav-text">My Profile</span>
                             </a>

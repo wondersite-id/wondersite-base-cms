@@ -40,7 +40,7 @@ class UtilityController extends ResourceController
                 ->addIndexColumn()
                 ->editColumn('form_type', '{{ ucfirst($form_type) }}')
                 ->addColumn('action', function ($row) {
-                    $showUrl = route('utilities.show', $row['id']);
+                    $showUrl = route('cms.utilities.show', $row['id']);
                     $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;</center>';
                     return $actionBtn;
                 })
@@ -50,7 +50,7 @@ class UtilityController extends ResourceController
 
         $type = $request->get('type');
         if ($type == null || !in_array($type, Utility::SETTING_TYPE)) {
-            return redirect()->route($this->routePath . '.index', ['type' => 'home']);
+            return redirect()->route('cms.' . $this->routePath . '.index', ['type' => 'home']);
         }
 
         return view('cms.' . $this->viewPath . '.index');
@@ -95,7 +95,7 @@ class UtilityController extends ResourceController
         $this->repository->update($utility->id, $data);
 
         session()->flash('message', 'Successfully updated feature data');
-        return redirect()->route($this->routePath . '.show', $utility);
+        return redirect()->route('cms.' . $this->routePath . '.show', $utility);
     }
 
     /**

@@ -12,8 +12,8 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Customers</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.'.$routePrefix . '.index') }}">List of {{ $title }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Add Customer</li>
     </ol>
 </nav>
@@ -26,8 +26,11 @@
     </div>
 </div>
 <div class="card card-default">
+    <div class="card-header">
+        <h2>New Customer</h2>
+    </div>
     <div class="card-body">
-        <form method="POST" action="{{ route($routePrefix . '.store') }}">
+        <form method="POST" action="{{ route('cms.'.$routePrefix . '.store') }}">
             @csrf
             <div class="form-group">
                 <label for="name">Name @include('cms._include.required') </label>
@@ -50,8 +53,8 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
-            <hr />
-            @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
+            <br />
+            @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
             @include('cms._include.buttons.save')
         </form>
     </div>

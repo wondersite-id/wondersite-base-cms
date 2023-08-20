@@ -12,8 +12,8 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List of SEO</li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List of {{ $title }}</li>
     </ol>
 </nav>
 <div class="card card-default">
@@ -58,7 +58,7 @@
             processing: true,
             serverSide: true,
             bLengthChange: false,
-            ajax: "{{ route($routePrefix . '.index') }}",
+            ajax: "{{ route('cms.'.$routePrefix . '.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'model_url', name: 'model_url'},

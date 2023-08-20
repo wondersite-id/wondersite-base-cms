@@ -17,7 +17,12 @@ class FeatureFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->words(3),
+            'slug' => fake()->slug(),
+            'description' => fake()->sentences(10),
+            'sequence_number' => fake()->randomDigitNotZero(),
+            'image' => fake()->imageUrl(),
+            'published_at' => fake()->dateTime()
         ];
     }
 }

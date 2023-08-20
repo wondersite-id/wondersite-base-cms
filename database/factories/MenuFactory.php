@@ -17,7 +17,11 @@ class MenuFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->words(3),
+            'sequence_number' => fake()->numberBetween(1,10),
+            'type' => 'header',
+            'url' => '/',
+            'is_open_in_new_tab' => fake()->boolean(),
         ];
     }
 }

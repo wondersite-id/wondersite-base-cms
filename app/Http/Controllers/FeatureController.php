@@ -52,13 +52,13 @@ class FeatureController extends ResourceController
                     if ($row->isPublished()) {
                         $publishHtml = '<span class="badge badge-success">Published</span>';
                     } else {
-                        $publishHtml = '<span class="badge badge-secondary">Unpublished</span>';
+                        $publishHtml = '<span class="badge badge-secondary">Draft</span>';
                     }
                     return $publishHtml;
                 })
                 ->editColumn('sequence_number', '<center>{{$sequence_number}}</center>')
                 ->addColumn('action', function ($row) {
-                    $showUrl = route('features.show', $row['id']);
+                    $showUrl = route('cms.features.show', $row['id']);
                     $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a></center>';
                     return $actionBtn;
                 })
@@ -100,7 +100,7 @@ class FeatureController extends ResourceController
         ]);
 
         session()->flash('message', 'Successfully saved new feature data');
-        return redirect()->route($this->routePath . '.index');
+        return redirect()->route('cms.' . $this->routePath . '.index');
     }
 
     /**
@@ -156,7 +156,7 @@ class FeatureController extends ResourceController
         ]);
 
         session()->flash('message', 'Successfully updated feature data');
-        return redirect()->route($this->routePath . '.show', $feature);
+        return redirect()->route('cms.' . $this->routePath . '.show', $feature);
     }
 
     /**
@@ -166,7 +166,7 @@ class FeatureController extends ResourceController
     {
         $this->repository->delete($feature->id);
         session()->flash('message', 'Successfully deleted feature data');
-        return redirect()->route($this->routePath . '.index');
+        return redirect()->route('cms.' . $this->routePath . '.index');
     }
 
     /**

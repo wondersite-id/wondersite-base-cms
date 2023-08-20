@@ -54,7 +54,7 @@ class Menu extends Model
                 'url',
                 'is_open_in_new_tab',
             ])
-            ->useLogName('menu')
+            ->useLogName(get_class($this))
             ->logOnlyDirty();
     }
 

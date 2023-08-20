@@ -12,8 +12,8 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of Customers</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.'.$routePrefix . '.index') }}">List of {{ $title }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Historical Changes</li>
     </ol>
 </nav>
@@ -31,16 +31,16 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.show', $model) }}">Data</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.edit', $model) }}">Form</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.edit', $model) }}">Form</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route($routePrefix . '.change-password', $model) }}">Change Password</a>
+                <a class="nav-link" href="{{ route('cms.'.$routePrefix . '.change-password', $model) }}">Change Password</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route($routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
+                <a class="nav-link active" href="{{ route('cms.'.$routePrefix . '.historical-changes', $model) }}">Historical Changes</a>
             </li>
 
         </ul>

@@ -53,7 +53,7 @@ class Utility extends Model implements HasMedia
                 'description',
                 'value',
             ])
-            ->useLogName('utility')
+            ->useLogName(get_class($this))
             ->logOnlyDirty();
     }
 

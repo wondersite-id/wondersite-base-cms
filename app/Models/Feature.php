@@ -63,7 +63,7 @@ class Feature extends Model implements HasMedia
     {
         return LogOptions::defaults()
             ->logOnly(['name', 'description', 'sequence_number', 'image'])
-            ->useLogName('feature')
+            ->useLogName(get_class($this))
             ->logOnlyDirty();
     }
 

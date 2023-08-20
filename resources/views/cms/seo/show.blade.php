@@ -12,8 +12,8 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.index') }}">List of SEO</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('cms.'.$routePrefix . '.index') }}">List of {{ $title }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Detail SEO</li>
     </ol>
 </nav>
@@ -29,7 +29,7 @@
     <div class="card-footer card-profile-footer">
         <ul class="nav nav-border-top justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route($routePrefix . '.show', $model) }}">Data</a>
+                <a class="nav-link active" href="{{ route('cms.'.$routePrefix . '.show', $model) }}">Data</a>
             </li>
         </ul>
     </div>
@@ -74,8 +74,8 @@
             <br>
             {{ $model->canonical_url ?: '-' }}
         </div>
-        <hr />
-        @include('cms._include.buttons.back', ['backUrl' => route($routePrefix . '.index')])
+        <br />
+        @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
         @include('cms._include.buttons.edit', ['editUrl' => route($routeName . '.edit', $model->model->id)])
     </div>
 </div>

@@ -12401,7 +12401,7 @@ code {
 @media (min-width: 768px) {
   .navbar .page-title {
     font-size: 1.625rem;
-    max-width: 150px;
+    max-width: 450px;
   }
 }
 @media (min-width: 1200px) {

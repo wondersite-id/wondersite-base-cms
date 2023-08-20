@@ -6,7 +6,7 @@ use App\Models\Utility;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class UtilitygPolicy
+class UtilityPolicy
 {
     /**
      * Determine whether the user can view any models.
