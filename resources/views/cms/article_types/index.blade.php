@@ -36,6 +36,7 @@
                     <th>No</th>
                     <th>Name</th>
                     <th>Seq. Number</th>
+                    <th>Related Articles</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -89,6 +90,7 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},
                 {data: 'sequence_number', name: 'sequence_number'},
+                {data: 'related_articles', name: 'related_articles'},
                 {
                     data: 'action', 
                     name: 'action', 

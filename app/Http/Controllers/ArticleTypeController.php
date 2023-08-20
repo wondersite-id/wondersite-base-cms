@@ -39,6 +39,13 @@ class ArticleTypeController extends ResourceController
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('sequence_number', '<center>{{$sequence_number}}</center>')
+                ->addColumn('related_articles', function ($row) {
+                    $count = $row->articles->count();
+                    if ($count == 0) {
+                        return "-";
+                    }
+                    return $row->articles->count() . ' Associated Article' . ($count > 1 ? 's':'');
+                })
                 ->addColumn('action', function ($row) {
                     $showUrl = route('cms.article-types.show', $row['id']);
                     $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a></center>';
