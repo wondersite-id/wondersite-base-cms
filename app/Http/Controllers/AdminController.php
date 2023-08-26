@@ -23,9 +23,10 @@ class AdminController extends ResourceController
      */
     public function __construct(UserRepositoryInterface $administratorRepository)
     {
+        $this->authorizeResource(User::class, 'administrator');
         $this->repository = $administratorRepository;
         $this->viewPath = "administrators";
-        $this->routePath = "cms.administrators";
+        $this->routePath = "administrators";
         view()->share([
             'title' => ucfirst($this->routePath),
             'description' => 'Administrators have super-admin role. They can access all of CMS module, manage order & customer data and can manage website content.',
@@ -44,7 +45,16 @@ class AdminController extends ResourceController
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $showUrl = route('cms.administrators.show', $row['id']);
-                    $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;' . ($row['id'] == Auth::user()->id ? '' : '<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a>') . '</center>';
+
+                    $showButton = $deleteBtn = "";
+                    if (Auth::user()->can('view', $row)) {
+                        $showButton = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>';
+                    }
+                    if (Auth::user()->can('delete', $row)) {
+                        $deleteBtn = '<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a>';
+                    }
+
+                    $actionBtn = $showButton.'&nbsp;&nbsp;'.$deleteBtn;
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -79,6 +89,7 @@ class AdminController extends ResourceController
      */
     public function historicalChanges(User $administrator)
     {
+        $this->authorize('view', Auth::user());
         $activities = Activity::whereSubjectType(get_class($administrator))
             ->whereSubjectId($administrator->id)
             ->orderBy("created_at", "desc")
@@ -99,6 +110,7 @@ class AdminController extends ResourceController
      */
     public function changePassword(User $administrator)
     {
+        $this->authorize('update', Auth::user());
         return view('cms.' . $this->viewPath . '.change-password', ['model' => $administrator]);
     }
 
@@ -107,6 +119,7 @@ class AdminController extends ResourceController
      */
     public function doChangePassword(ChangePasswordUserRequest $request, User $administrator)
     {
+        $this->authorize('update', Auth::user());
         $request->validated();
         $pass = ($request->only(['password']))['password'];
 

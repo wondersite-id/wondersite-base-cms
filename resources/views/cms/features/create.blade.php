@@ -48,9 +48,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Description @include('cms._include.required')</label>
-                <textarea id="description" class="wysiwyg form-control @error('description') is-invalid @enderror" name="description">
-                    {{ old('description') }}
-                </textarea>
+                <textarea id="description" class="wysiwyg form-control @error('description') is-invalid @enderror" name="description">{{ old('description') }}</textarea>
                 @error('description')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

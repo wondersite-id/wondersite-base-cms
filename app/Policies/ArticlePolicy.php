@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Article;
-use Illuminate\Auth\Access\Response;
 
 class ArticlePolicy
 {
@@ -13,15 +12,15 @@ class ArticlePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, article $article): bool
+    public function view(User $user, Article $article): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -29,38 +28,38 @@ class ArticlePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, article $article): bool
+    public function update(User $user, Article $article): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, article $article): bool
+    public function delete(User $user, Article $article): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, article $article): bool
+    public function restore(User $user, Article $article): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, article $article): bool
+    public function forceDelete(User $user, Article $article): bool
     {
-        //
+        return $user->isAdmin();
     }
 }

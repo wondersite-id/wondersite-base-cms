@@ -7,6 +7,7 @@ use App\Interfaces\UtilityRepositoryInterface;
 use App\Models\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 
@@ -19,6 +20,7 @@ class UtilityController extends ResourceController
      */
     public function __construct(UtilityRepositoryInterface $repo)
     {
+        $this->authorizeResource(Utility::class, 'utility');
         $this->repository = $repo;
         $this->viewPath = "utilities";
         $this->routePath = "utilities";
@@ -41,7 +43,16 @@ class UtilityController extends ResourceController
                 ->editColumn('form_type', '{{ ucfirst($form_type) }}')
                 ->addColumn('action', function ($row) {
                     $showUrl = route('cms.utilities.show', $row['id']);
-                    $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;</center>';
+
+                    $showButton = $deleteBtn = "";
+                    if (Auth::user()->can('view', $row)) {
+                        $showButton = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>';
+                    }
+                    if (Auth::user()->can('delete', $row)) {
+                        $deleteBtn = '<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a>';
+                    }
+
+                    $actionBtn = $showButton.'&nbsp;&nbsp;'.$deleteBtn;
                     return $actionBtn;
                 })
                 ->rawColumns(['description', 'published', 'sequence_number', 'image', 'action'])
@@ -103,6 +114,7 @@ class UtilityController extends ResourceController
      */
     public function historicalChanges(Utility $utility)
     {
+        $this->authorize('view', Auth::user());
         $activities = Activity::whereSubjectType(get_class($utility))
             ->whereSubjectId($utility->id)
             ->orderBy("created_at", "desc")

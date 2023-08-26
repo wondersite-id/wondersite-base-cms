@@ -30,10 +30,12 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
+        @can('create', App\Models\Feature::class)
         <a href="{{ route('cms.'.$routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
+        @endcan
     </div>
 </div>
 <div class="card card-default">
@@ -67,9 +69,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Description @include('cms._include.required')</label>
-                <textarea id="description" class="wysiwyg form-control @error('description') is-invalid @enderror" name="description">
-                    {{ old('description', $model->description) }}
-                </textarea>
+                <textarea id="description" class="wysiwyg form-control @error('description') is-invalid @enderror" name="description">{{ old('description', $model->description) }}</textarea>
                 @error('description')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

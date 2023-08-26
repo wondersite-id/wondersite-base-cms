@@ -63,7 +63,7 @@ class User extends Authenticatable
     /**
      * Scope a query to only include admin users.
      */
-    public function scopeIsAdmin(Builder $query): void
+    public function scopeAdministrator(Builder $query): void
     {
         $query->where('is_admin', true);
     }
@@ -71,10 +71,24 @@ class User extends Authenticatable
     /**
      * Scope a query to only include customer users.
      */
-    public function scopeIsCustomer(Builder $query): void
+    public function scopeCustomer(Builder $query): void
     {
         $query->where('is_admin', false);
     }
 
+    /**
+     * Check if user is admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin == true;
+    }
 
+    /**
+     * Check if user is customer
+     */
+    public function isCustomer(): bool
+    {
+        return $this->is_admin == false;
+    }
 }

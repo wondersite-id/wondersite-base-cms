@@ -1,5 +1,4 @@
 <div class="sidebar-left" data-simplebar style="height: 100%;">
-    @if (Auth::user()->isAdmin())
     <ul class="nav sidebar-inner" id="sidebar-menu">
         <li class="{{ Request::is('cms/dashboard') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('cms.dashboard') }}">
@@ -7,15 +6,29 @@
                 <span class="nav-text">Dashboard</span>
             </a>
         </li>
+
+        @if(
+            Gate::inspect('viewAny', App\Models\Feature::class)->allowed() ||
+            Gate::inspect('viewAny', App\Models\Article::class)->allowed() ||
+            Gate::inspect('viewAny', RalphJSmit\Laravel\SEO\Models\SEO::class)->allowed() ||
+            Gate::inspect('viewAny', App\Models\Menu::class)->allowed() ||
+            Gate::inspect('viewAny', App\Models\Utility::class)->allowed()
+        )
         <li class="section-title">
             Website Management
         </li>
+        @endif
+
+        @can('viewAny', App\Models\Feature::class)
         <li class="{{ Request::is('cms/features', 'cms/features/*') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('cms.features.index') }}">
                 <i class="mdi mdi-hexagon-multiple"></i>
                 <span class="nav-text">Features</span>
             </a>
         </li>
+        @endcan
+
+        @can('viewAny', App\Models\Article::class)
         @php $isActive = Request::is('cms/articles', 'cms/articles/*', 'cms/article-types', 'cms/article-types/*'); @endphp
         <li class="has-sub {{ $isActive == true ? 'active expand' : '' }}" >
             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#article-sidebar" aria-expanded="false" aria-controls="article-sidebar">
@@ -38,24 +51,35 @@
                 </div>
             </ul>
         </li>
+        @endcan
+
+        @can('viewAny', RalphJSmit\Laravel\SEO\Models\SEO::class)
         <li class="{{ Request::is('cms/seos', 'cms/seos/*') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('cms.seos.index') }}">
                 <i class="mdi mdi-cloud-search-outline"></i>
                 <span class="nav-text">SEO</span>
             </a>
         </li>
+        @endcan
+
+        @can('viewAny', App\Models\Menu::class)
         <li class="{{ Request::is('cms/menus', 'cms/menus/*') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('cms.menus.index') }}">
                 <i class="mdi mdi-menu-open"></i>
                 <span class="nav-text">Menus</span>
             </a>
         </li>
+        @endcan
+
+        @can('viewAny', App\Models\Utility::class)
         <li class="{{ Request::is('cms/utilities', 'cms/utilities/*') ? 'active' : '' }}">
             <a class="sidenav-item-link" href="{{ route('cms.utilities.index', ['type' => 'home']) }}">
                 <i class="mdi mdi-wrench"></i>
                 <span class="nav-text">Utilities</span>
             </a>
         </li>
+        @endcan
+
         <li class="section-title">
             Access Management
         </li>
@@ -68,11 +92,13 @@
             <ul class="collapse {{ $isActive == true ? 'show' : '' }}" id="user-sidebar"
                 data-parent="#sidebar-menu">
                 <div class="sub-menu">
+                    @if (Auth::user()->isAdmin())
                     <li class="{{ Request::is('cms/administrators', 'cms/administrators/*') ? 'active' : '' }}">
                         <a class="sidenav-item-link" href="{{ route('cms.administrators.index') }}">
                         <span class="nav-text">Admin</span>
                         </a>
                     </li>
+                    @endif
                     <li class="{{ Request::is('cms/customers', 'cms/customers/*') ? 'active' : '' }}">
                         <a class="sidenav-item-link" href="{{ route('cms.customers.index') }}">
                         <span class="nav-text">Customer</span>
@@ -82,7 +108,6 @@
             </ul>
         </li>
     </ul>
-    @endif
 </div>
 <div class="sidebar-footer">
     <div class="sidebar-footer-content">

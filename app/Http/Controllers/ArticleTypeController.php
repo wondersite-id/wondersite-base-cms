@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateArticleTypeRequest;
 use App\Interfaces\ArticleTypeRepositoryInterface;
 use App\Models\ArticleType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 
@@ -19,6 +20,7 @@ class ArticleTypeController extends ResourceController
      */
     public function __construct(ArticleTypeRepositoryInterface $repo)
     {
+        $this->authorizeResource(ArticleType::class, 'articleType');
         $this->repository = $repo;
         $this->viewPath = "article_types";
         $this->routePath = "article-types";
@@ -48,7 +50,16 @@ class ArticleTypeController extends ResourceController
                 })
                 ->addColumn('action', function ($row) {
                     $showUrl = route('cms.article-types.show', $row['id']);
-                    $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a></center>';
+
+                    $showButton = $deleteBtn = "";
+                    if (Auth::user()->can('view', $row)) {
+                        $showButton = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>';
+                    }
+                    if (Auth::user()->can('delete', $row)) {
+                        $deleteBtn = '<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a>';
+                    }
+
+                    $actionBtn = $showButton.'&nbsp;&nbsp;'.$deleteBtn;
                     return $actionBtn;
                 })
                 ->rawColumns(['sequence_number', 'action'])
@@ -113,6 +124,7 @@ class ArticleTypeController extends ResourceController
      */
     public function historicalChanges(ArticleType $articleType)
     {
+        $this->authorize('view', Auth::user());
         $activities = Activity::whereSubjectType(get_class($articleType))
             ->whereSubjectId($articleType->id)
             ->orderBy("created_at", "desc")

@@ -23,6 +23,7 @@ class CustomerController extends ResourceController
      */
     public function __construct(UserRepositoryInterface $customerRepository)
     {
+        $this->authorizeResource(User::class, 'customer');
         $this->repository = $customerRepository;
         $this->viewPath = "customers";
         $this->routePath = "customers";
@@ -39,12 +40,25 @@ class CustomerController extends ResourceController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->repository->getCustomers();
+            if (Auth::user()->isAdmin()) {
+                $data = $this->repository->getCustomers();
+            } else {
+                $data = $this->repository->getSpecificCustomer(Auth::user()->id);
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $showUrl = route('cms.customers.show', $row['id']);
-                    $actionBtn = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>&nbsp;&nbsp;' . ($row['id'] == Auth::user()->id ? '' : '<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a>') . '</center>';
+
+                    $showButton = $deleteBtn = "";
+                    if (Auth::user()->can('view', $row)) {
+                        $showButton = '<a href="' . $showUrl . '" class="text-info"><i class="mdi mdi-eye-circle mr-1"></i>Detail</a>';
+                    }
+                    if (Auth::user()->can('delete', $row)) {
+                        $deleteBtn = '<a href="javascript:void(0)" class="text-danger delete-btns" data-toggle="modal" data-target="#deleteModal" data-id="' . $row['id'] . '"><i class="mdi mdi-trash-can mr-1"></i>Delete</a>';
+                    }
+
+                    $actionBtn = $showButton.'&nbsp;&nbsp;'.$deleteBtn;
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
