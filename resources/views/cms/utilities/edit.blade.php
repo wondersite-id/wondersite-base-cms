@@ -108,16 +108,18 @@
                     @else
                         <img id="image-preview" height="150px" src="#" alt="Uploaded image" class="mt-3" style="display:none;"/>
                     @endif
-
-                @elseif ($model->form_type == "text" || $model->form_type == "textarea")
+                @elseif ($model->form_type == "text")
                     <input class="form-control @error('value') is-invalid @enderror" id="value" name="value" placeholder="Value" value="{{ old('value', $model->value) }}">
                     @error('value')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
+                @elseif ($model->form_type == "textarea")
+                    <textarea id="value" class="form-control @error('value') is-invalid @enderror" name="value">{{ old('value', $model->value) }}</textarea>
+                    @error('value')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 @elseif ($model->form_type == "wysiwyg")
-                    <textarea id="value" class="wysiwyg form-control @error('value') is-invalid @enderror" name="value">
-                        {{ old('value', $model->value) }}
-                    </textarea>
+                    <textarea id="value" class="wysiwyg form-control @error('value') is-invalid @enderror" name="value">{{ old('value', $model->value) }}</textarea>
                     @error('value')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror

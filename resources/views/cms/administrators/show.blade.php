@@ -64,8 +64,10 @@
                 </a>
         </div>
         <br />
-        @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
-        @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
+        @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])        
+        @can('update', $model)
+            @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
+        @endcan
     </div>
 </div>
 @endsection

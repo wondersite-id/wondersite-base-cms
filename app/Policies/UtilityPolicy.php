@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Utility;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class UtilityPolicy
 {
@@ -13,7 +12,7 @@ class UtilityPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -21,7 +20,7 @@ class UtilityPolicy
      */
     public function view(User $user, Utility $utility): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -29,7 +28,7 @@ class UtilityPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -37,7 +36,7 @@ class UtilityPolicy
      */
     public function update(User $user, Utility $utility): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -45,7 +44,7 @@ class UtilityPolicy
      */
     public function delete(User $user, Utility $utility): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +52,7 @@ class UtilityPolicy
      */
     public function restore(User $user, Utility $utility): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +60,6 @@ class UtilityPolicy
      */
     public function forceDelete(User $user, Utility $utility): bool
     {
-        //
+        return $user->isAdmin();
     }
 }

@@ -30,10 +30,12 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
+        @can('create', App\Models\Article::class)
         <a href="{{ route('cms.'.$routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
+        @endcan
     </div>
 </div>
 <div class="card card-default ">
@@ -138,7 +140,9 @@
         </div>
         <hr />
         @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
-        @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
+        @can('update', $model)
+            @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
+        @endcan
     </div>
 </div>
 @endsection

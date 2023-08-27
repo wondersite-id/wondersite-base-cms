@@ -23,10 +23,12 @@
         <p class="card-text pb-4 pt-1">
             @yield('description')
         </p>
+        @can('create', App\Models\Menu::class)
         <a href="{{ route('cms.'.$routePrefix . '.create') }}" class="btn btn-primary btn-sm btn-pill">
             <i class="mdi mdi-spin mdi-shape-polygon-plus"></i>
             &nbsp;Create New @yield('title')
         </a>
+        @endcan
     </div>
 </div>
 <div class="card card-default">

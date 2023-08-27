@@ -14,12 +14,17 @@ class UserRepository implements UserRepositoryInterface
 
     public function getAdmins()
     {
-        return User::isAdmin()->get();
+        return User::administrator()->get();
     }
 
     public function getCustomers()
     {
-        return User::isCustomer()->get();
+        return User::customer()->get();
+    }
+
+    public function getSpecificCustomer($userId)
+    {
+        return User::whereId($userId)->get();
     }
 
     public function findById($userId)

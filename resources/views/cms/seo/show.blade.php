@@ -39,7 +39,7 @@
             @php
             $modelType = Str::replace('App\Models\\', '', $model->model_type);
             $routeName = Str::lower(Str::plural($modelType));
-            $showUrl = route($routeName . '.show', $model->model_id);
+            $showUrl = route('cms.' . $routeName . '.show', $model->model_id);
             @endphp
             <br>
             <a href="{{ $showUrl }}">{{ $modelType }} - {{ $model->model->name }}</a>
@@ -75,8 +75,10 @@
             {{ $model->canonical_url ?: '-' }}
         </div>
         <br />
-        @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index')])
-        @include('cms._include.buttons.edit', ['editUrl' => route($routeName . '.edit', $model->model->id)])
+        @include('cms._include.buttons.back', ['backUrl' => route('cms.' . $routePrefix . '.index')])
+        @can('update', $model->model)
+            @include('cms._include.buttons.edit', ['editUrl' => route('cms.' . $routeName . '.edit', $model->model->id)])
+        @endcan
     </div>
 </div>
 @endsection

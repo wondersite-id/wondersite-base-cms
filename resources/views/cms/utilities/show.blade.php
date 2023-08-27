@@ -90,7 +90,9 @@
         </div>
         <br />
         @include('cms._include.buttons.back', ['backUrl' => route('cms.'.$routePrefix . '.index', ['type' => $model->type])])
-        @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
+        @can('update', $model)
+            @include('cms._include.buttons.edit', ['editUrl' => route('cms.'.$routePrefix . '.edit', $model)])
+        @endcan
     </div>
 </div>
 @endsection
