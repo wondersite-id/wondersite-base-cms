@@ -23,4 +23,5 @@ yarn-error.log
 /public/media/*
 /storage/media-library/temp/
 
+/public/sitemap.xml
 .DS_Store*

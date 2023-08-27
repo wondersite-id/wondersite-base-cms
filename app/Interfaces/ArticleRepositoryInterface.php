@@ -5,6 +5,7 @@ namespace App\Interfaces;
 interface ArticleRepositoryInterface
 {
     public function getAll();
+    public function getPublished();
     public function findById($articleId);
     public function findByIdNullable($articleId);
     public function delete($articleId);

@@ -3,38 +3,43 @@
 namespace App\Repositories;
 
 use App\Interfaces\FeatureRepositoryInterface;
-use App\Models\Feature;
+use App\Models\Feature as Model;
 
 class FeatureRepository implements FeatureRepositoryInterface
 {
     public function getAll()
     {
-        return Feature::all();
+        return Model::all();
+    }
+
+    public function getPublished()
+    {
+        return Model::published()->get();
     }
 
     public function findById($featureId)
     {
-        return Feature::findOrFail($featureId);
+        return Model::findOrFail($featureId);
     }
 
     public function findByIdNullable($featureId)
     {
-        return Feature::find($featureId);
+        return Model::find($featureId);
     }
 
     public function delete($featureId)
     {
-        Feature::destroy($featureId);
+        Model::destroy($featureId);
     }
 
     public function create(array $featureDetails)
     {
-        return Feature::create($featureDetails);
+        return Model::create($featureDetails);
     }
 
     public function update($featureId, array $newDetails)
     {
-        $feature = Feature::find($featureId);
+        $feature = Model::find($featureId);
         foreach ($newDetails as $column => $value) {
             $feature->{$column} = $value;
         }
