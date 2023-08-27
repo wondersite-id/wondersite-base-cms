@@ -3,38 +3,45 @@
 namespace App\Repositories;
 
 use App\Interfaces\MenuRepositoryInterface;
-use App\Models\Menu;
+use App\Models\Menu as Model;
 
 class MenuRepository implements MenuRepositoryInterface
 {
     public function getAll()
     {
-        return Menu::orderBy('sequence_number', 'asc')->get()->sortByDesc('type');
+        return Model::orderBy('sequence_number', 'asc')->get()->sortByDesc('type');
+    }
+
+    public function getActiveLinkMenus()
+    {
+        return Model::where('url', '!=', 'javascript:void(0)')
+            ->where('is_open_in_new_tab', false)
+            ->get();
     }
 
     public function findById($menuId)
     {
-        return Menu::findOrFail($menuId);
+        return Model::findOrFail($menuId);
     }
 
     public function findByIdNullable($menuId)
     {
-        return Menu::find($menuId);
+        return Model::find($menuId);
     }
 
     public function delete($menuId)
     {
-        Menu::destroy($menuId);
+        Model::destroy($menuId);
     }
 
     public function create(array $menuDetails)
     {
-        return Menu::create($menuDetails);
+        return Model::create($menuDetails);
     }
 
     public function update($menuId, array $newDetails)
     {
-        $menu = Menu::find($menuId);
+        $menu = Model::find($menuId);
         foreach ($newDetails as $column => $value) {
             $menu->{$column} = $value;
         }
@@ -43,11 +50,11 @@ class MenuRepository implements MenuRepositoryInterface
 
     public function getAllParents()
     {
-        return Menu::root()->orderBy('sequence_number', 'asc')->get()->sortByDesc('type');
+        return Model::root()->orderBy('sequence_number', 'asc')->get()->sortByDesc('type');
     }
 
     public function getAllChildsByParentId($parentId)
     {
-        return Menu::whereParentId($parentId)->orderBy('sequence_number', 'asc')->get();
+        return Model::whereParentId($parentId)->orderBy('sequence_number', 'asc')->get();
     }
 }

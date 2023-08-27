@@ -5,6 +5,7 @@ namespace App\Interfaces;
 interface FeatureRepositoryInterface
 {
     public function getAll();
+    public function getPublished();
     public function findById($featureId);
     public function findByIdNullable($featureId);
     public function delete($featureId);

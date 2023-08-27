@@ -64,7 +64,11 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="name">URL @include('cms._include.required')</label>
+                <label for="name">
+                    URL
+                    <i class="mdi mdi-tooltip-edit"  data-toggle="tooltip" data-placement="right" data-original-title="For empty URL in parent menu please fill the URL with `javascript:void(0)`"></i>
+                    @include('cms._include.required')
+                </label>
                 <input class="form-control @error('url') is-invalid @enderror" id="url" name="url" placeholder="URL" value="{{ old('url') }}">
                 @error('url')
                     <small class="text-danger">{{ $message }}</small>

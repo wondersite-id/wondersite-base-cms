@@ -3,43 +3,43 @@
 namespace App\Repositories;
 
 use App\Interfaces\UtilityRepositoryInterface;
-use App\Models\Utility;
+use App\Models\Utility as Model;
 
 class UtilityRepository implements UtilityRepositoryInterface
 {
     public function getAll()
     {
-        return Utility::all();
+        return Model::all();
     }
 
     public function getByType($type)
     {
-        return Utility::whereType($type)->get();
+        return Model::whereType($type)->get();
     }
 
     public function findById($utilityId)
     {
-        return Utility::findOrFail($utilityId);
+        return Model::findOrFail($utilityId);
     }
 
     public function findByIdNullable($utilityId)
     {
-        return Utility::find($utilityId);
+        return Model::find($utilityId);
     }
 
     public function delete($utilityId)
     {
-        Utility::destroy($utilityId);
+        Model::destroy($utilityId);
     }
 
     public function create(array $utilityDetails)
     {
-        return Utility::create($utilityDetails);
+        return Model::create($utilityDetails);
     }
 
     public function update($utilityId, array $newDetails)
     {
-        $utility = Utility::find($utilityId);
+        $utility = Model::find($utilityId);
         foreach ($newDetails as $column => $value) {
             $utility->{$column} = $value;
         }
